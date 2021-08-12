@@ -6,16 +6,38 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <div id="main_div">
-        <div>
-            <h1 id="main_title">First Web Game: GoBang</h1>
+    <div id="container">
+        <div id="navbar">
+            <!-- Navigation bar that follows the screen down, always showing-->
+            <h1 id="main-logo">Title and act as a button to return to main page</h1>
+        </div>
+        
+        <div id="header">
+            <!--Contains title, score, time, etc.-->
+            <h1>This is the page title of the game</h1>
+            <!-- this is for debugging -->
+            <h1 id="debug"></h1>
         </div>
 
-        <p>Random text here...</p>
-        <button id="btn_start_game">Start game</button>
-    </div>
+        <button id="btn_start_game" onclick="initBoard()">Start game</button>
+        <div onclick="test()"></div>
+        <!-- board here -->    
+        <div id="game_board">
+            
+        </div>
+        <!-- Name of the creator of the page, copyright and last edited -->
+        <div id="footer">
+            <p>Copyrights reserved.<br>Jimmy Chan, Tommy Chan, Donny Chan<br>2021 &copy;</p>
+        </div>            
 
+        </div>
+
+
+    </div>
+        
     <!-- scripts -->
-    <script src="main.js"></script>
+    <script type="text/javascript" src="main.js"></script>
 </body>
 </html>
+
+ctrl + shift + P, then type in terminal

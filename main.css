@@ -1,0 +1,32 @@
+/* The following style applies to HTML <body> tags*/
+body {
+    background-color: rgb(240, 240, 240);
+    font-family: 'Courier New', Courier, monospace;
+    color: rgb(50, 50, 50);
+    margin: 0px;
+    padding: 0px;
+}
+
+#container {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+/* The following style applies to HTML elements with attribute id="game_board" */
+#game_board {
+    background-color: rgb(250, 200, 140);
+    width: 540px;
+    height: 540px;
+    margin: auto;
+    position: relative;
+}
+
+.tileDivs {
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    border-radius: 50%;
+    background-color: white;
+}
