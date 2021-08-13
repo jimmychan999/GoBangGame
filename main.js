@@ -124,9 +124,13 @@ function putStoneAt(x, y) {
 function modifyStoneColor(x, y) {
     let tile = getTileDiv(x, y);
     if (isWhoseTurn == BLACK) {
-        tile.style.backgroundColor = "black";
+        tile.style.backgroundColor = "rgb(100, 100, 100)";
+        tile.style.boxShadow = "inset -10px -6px 16px rgba(0, 0, 0, 0.8)";
+        tile.backgroundImage = "linear-gradient(-45deg, rgba(255,255,220,.3) 0%, transparent 100%)";
     } else if (isWhoseTurn == WHITE) {
-        tile.style.backgroundColor = "white";
+        tile.style.backgroundColor = "rgb(245, 245, 245)";
+        tile.style.boxShadow = "inset -5px -3px 8px rgba(0, 0, 0, 0.3)";
+        tile.backgroundImage = "linear-gradient(-45deg, rgba(255,255,220,.3) 0%, transparent 100%)";
     }
 }
 
