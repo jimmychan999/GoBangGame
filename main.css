@@ -120,14 +120,11 @@ button {
     height: 540px;
     margin: auto;
     position: relative;
-    border-radius: 4px;
-    /* box-shadow: 0px 0px 8px 2px rgb(0, 0, 0, 0.3); */
+    border-radius: 12px;
     box-shadow: 0px 10px 13px -7px #0000009e, 1px 5px 7px -2px rgb(38 38 38 / 15%);
-    border: 5px solid var(--color-board);
 }
 
 .board-line-ver {
-    height: 100%;
     width: 1px;
     position: absolute;
     background-color: var(--color-board-line);
@@ -135,7 +132,6 @@ button {
 
 .board-line-hor {
     height: 1px;
-    width: 100%;
     position: absolute;
     background-color: var(--color-board-line);
 }
