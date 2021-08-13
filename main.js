@@ -121,6 +121,7 @@ function putStoneAt(x, y) {
         tile.style.backgroundColor = COLOR_STR_WHITE;
         tile.style.boxShadow = "inset -5px -3px 8px rgba(0, 0, 0, 0.3)";
         tile.backgroundImage = "linear-gradient(-45deg, rgba(255,255,220,.3) 0%, transparent 100%)";
+        board[x][y] = WHITE;
     }
 }
 
@@ -149,7 +150,6 @@ function hideBoardStones() {
     for (let tileDiv of tileDivs) {
         tileDiv.style.backgroundColor = COLOR_STR_TRANSPARENT;
         tileDiv.style.boxShadow = "0 0 0 0 rgba(0,0,0,0)";
-        // tileDiv.backgroundImage = "none"
     }
 }
 
