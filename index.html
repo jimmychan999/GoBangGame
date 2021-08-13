@@ -9,25 +9,44 @@
     <div id="container">
         <div id="navbar">
             <!-- Navigation bar that follows the screen down, always showing-->
-            <h1 id="main-logo">Title and act as a button to return to main page</h1>
+            <div id="main-logo">
+                <p>[Logo here]</p>
+            </div>
+            <div id="nav-menu">
+                <div class="nav-menu-items">
+                    <a href="profile.html">My Profile</a>
+                </div>
+                <div class="nav-menu-items">
+                    <a href="help.html">Help</a>
+                </div>
+                <div class="nav-menu-items">
+                    <a href="about.html">About Us</a>
+                </div>
+            </div>
         </div>
         
-        <div id="header">
-            <!--Contains title, score, time, etc.-->
-            <h1>This is the page title of the game</h1>
-            <!-- this is for debugging -->
-            <h1 id="debug"></h1>
+        <div id="body">
+            <div id="header">
+                <!--Contains title, score, time, etc.-->
+                <div id="main-title">
+                    <h1>GoBang</h1>
+                </div>
+            </div>
+            
+            <button id="btn_start_game" onclick="initBoard()">Start game</button>
+            <div onclick="test()"></div>
+            <!-- board here -->    
+            <div id="game_board">
+                
+            </div>
         </div>
 
-        <button id="btn_start_game" onclick="initBoard()">Start game</button>
-        <div onclick="test()"></div>
-        <!-- board here -->    
-        <div id="game_board">
-            
-        </div>
         <!-- Name of the creator of the page, copyright and last edited -->
         <div id="footer">
-            <p>Copyrights reserved.<br>Jimmy Chan, Tommy Chan, Donny Chan<br>2021 &copy;</p>
+            <div id="footer-line"></div> 
+            <div>
+                <p>Copyrights reserved.<br>Jimmy Chan, Tommy Chan, Donny Chan<br>2021 &copy;</p>
+            </div>
         </div>            
 
         </div>
@@ -39,5 +58,3 @@
     <script type="text/javascript" src="main.js"></script>
 </body>
 </html>
-
-ctrl + shift + P, then type in terminal
