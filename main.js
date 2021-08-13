@@ -4,6 +4,8 @@ const TILE_STATE_EMPTY = 0;
 const TILE_STATE_BLACK = 1;
 const TILE_STATE_WHITE = 2;
 
+var lastStoneColor = 1;
+
 class Tile {
     constructor(state, x, y) {
         this.state = state;
@@ -30,8 +32,8 @@ const WHITE = 1;
 let isWhoseTurn = BLACK;
 let boardSize = 15;
 
-let board = [];  // Should be a 2D array of Tile
-let tileDivs = [];
+let board = [];     // Should be a 2D array of Tile
+let tileDivs = [];  // 1D array of document elements
 
 function initBoard() {
     console.log("initBoard()");
@@ -41,7 +43,6 @@ function initBoard() {
         for (let j = 0; j < boardSize; ++j) {  // loop cols
             tile = new Tile(TILE_STATE_EMPTY, i, j);
             row.push(tile);
-            
             console.log(i.toString() + "," + j.toString());
         }
         board.push(row);
@@ -84,7 +85,6 @@ function drawBoard() {
     // child of "game-board" div.
 
     // Store tile divs in an array for faster access later
-    let tileDivs = [];
     let gameBoard = document.getElementById("game-board");
     for(let i = 0; i < boardSize; i++) {
         for(let j = 0; j < boardSize; j++) {
@@ -93,10 +93,11 @@ function drawBoard() {
             tileDiv.style.left = `${10 + j * 35}px`;
             tileDiv.style.top = `${10 + i * 35}px`;
             tileDiv.setAttribute("id", "tile: " + i.toString() + "," + j.toString());
-            tileDiv.setAttribute("onclick", `modifyStoneColor(${i}, ${j}, ${2})`);
-            tileDivs.push(tileDiv);
+            tileDiv.setAttribute("onclick", `putStoneAt(${i}, ${j})`);
+            tileDivs.push(tileDiv);  // The index of this element is (i * boardSize + j)
         }
     }
+
     
     // Set each tile div as children of "game-board" div.
     for (tileDiv of tileDivs) {
@@ -104,22 +105,31 @@ function drawBoard() {
     }
 }
 
-function testAlert(x) {
-    if (Number.isInteger(x)){
-
-        alert(x)
-    }
+function putStoneAt(x, y) {
+    modifyStoneColor(x, y);
+    nextTurn();
 }
-function modifyStoneColor(xtile, ytile, color) {
-    tile = document.getElementById("tile: " + xtile + "," + ytile);
+
+function modifyStoneColor(x, y) {
+    // let tile = document.getElementById("tile: " + xtile + "," + ytile);
+    let tile = getTileDiv(x, y);
+    console.log(x * boardSize + y);
+    console.log(tileDivs.length);
+    console.log(tile);
     // alert(color)
-    // if (color == 1) {
-    //     tile.style.background-color == "white"
-    // }
-    if (color == '2') {
-        // alert("heakjlfksd")}
+    if (isWhoseTurn == BLACK) {
         tile.style.backgroundColor = "black";
+    } else if (isWhoseTurn == WHITE) {
+        tile.style.backgroundColor = "white";
     }
+    // if (lastStoneColor % 2 == 1) {
+    //     tile.style.backgroundColor = "black";
+    // }
+    // if (lastStoneColor % 2 == 0) {
+    //     // alert("heakjlfksd")}
+    //     tile.style.backgroundColor = "white";
+    // }
+    // lastStoneColor++;
     // }
     // else {
     //     tile.style.background-color == "transparent"
@@ -153,4 +163,9 @@ function showBoard() {
 
 function startGame() {
     // turn all stones to white
+    tileDiv = document.getElementsByClassName("tile-divs");
+    for (let i = 0; i < tileDiv.length; i++) {
+        tileDiv[i].style.backgroundColor = "rgba(0, 0, 0, 0)";
+    }
+    lastStoneColor = 1;
 }

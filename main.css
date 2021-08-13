@@ -145,7 +145,7 @@ button {
     width: 30px;
     position: absolute;
     border-radius: 50%;
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 /* Footer */
