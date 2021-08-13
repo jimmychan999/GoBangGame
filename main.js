@@ -53,15 +53,15 @@ function initBoard() {
 
 function drawBoard() {
     // Loop each tile, and create a corresponding div, then set it as 
-    // child of "game_board" div.
+    // child of "game-board" div.
 
     // Store tile divs in an array for faster access later
     let tileDivs = [];
-    let gameBoard = document.getElementById("game_board");
+    let gameBoard = document.getElementById("game-board");
     for(let i = 0; i < boardSize; i++) {
         for(let j = 0; j < boardSize; j++) {
             tileDiv = document.createElement("div");
-            tileDiv.setAttribute("class", "tileDivs");
+            tileDiv.setAttribute("class", "tile-divs");
             tileDiv.style.left = `${10 + j * 35}px`;
             tileDiv.style.top = `${10 + i * 35}px`;
             tileDiv.setAttribute("id", "tile: " + i.toString() + "," + j.toString());
@@ -70,7 +70,7 @@ function drawBoard() {
         }
     }
     
-    // Set each tile div as children of "game_board" div.
+    // Set each tile div as children of "game-board" div.
     for (tileDiv of tileDivs) {
         gameBoard.appendChild(tileDiv);
     }
