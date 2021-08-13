@@ -148,6 +148,8 @@ function showBoard() {
 function hideBoardStones() {
     for (let tileDiv of tileDivs) {
         tileDiv.style.backgroundColor = COLOR_STR_TRANSPARENT;
+        tileDiv.style.boxShadow = "0 0 0 0 rgba(0,0,0,0)";
+        // tileDiv.backgroundImage = "none"
     }
 }
 
