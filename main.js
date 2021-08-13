@@ -14,7 +14,7 @@ const gameBoard = document.getElementById("game-board");
 
 // Starting parameters
 let isWhoseTurn = BLACK;
-let boardSize = 15;
+let boardSize = 19;
 let boardEdgeWidth = 10;
 let stoneDiameter = 30;
 let stoneSep = 5;

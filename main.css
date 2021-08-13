@@ -122,8 +122,8 @@ button:disabled {
 
 #game-board {
     background-color: var(--color-board);
-    width: 540px;
-    height: 540px;
+    width: 680px;
+    height: 680px;
     margin: auto;
     position: relative;
     border-radius: 12px;
