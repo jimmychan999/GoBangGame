@@ -7,7 +7,7 @@
 </head>
 <body>
     <div id="container">
-        <div id="navbar">
+        <div id="nav-bar">
             <!-- Navigation bar that follows the screen down, always showing-->
             <div id="main-logo">
                 <p>[Logo here]</p>
@@ -33,11 +33,19 @@
                 </div>
             </div>
             
-            <button id="btn_start_game" onclick="initBoard()">Start game</button>
-            <div onclick="test()"></div>
-            <!-- board here -->    
-            <div id="game-board">
-                
+            <div id="game-body">
+
+                <div id="top-panel">
+                    <button id="btn-start-game" onclick="initBoard()">Start game</button>
+                    <button id="btn-end-game" onclick="endGame()">End game</button>
+                </div>
+                <!-- board here -->    
+                <div id="game-board">
+                    
+                </div>
+                <div id="bottom-panel">
+
+                </div>
             </div>
         </div>
 
