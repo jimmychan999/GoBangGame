@@ -2,6 +2,7 @@
 :root {
     --navbar-height: 64px;
     --navbar-padding-hor: 64px;
+    --body-padding-hor: 64px;
     --footer-color-bg: rgb(60, 60, 60);
 }
 
@@ -30,7 +31,7 @@ html, body {
     background-color: white;
     box-shadow: 0 2px 4px 0 rgb(0, 0, 0, 0.2);
     margin-top: 0px;
-    margin-bottom: 2rem;
+    /* margin-bottom: 2rem; */
     padding-left: var(--navbar-padding-hor);
     padding-right: var(--navbar-padding-hor);
     vertical-align: middle;
@@ -61,6 +62,8 @@ html, body {
     margin-bottom: auto;
 }
 
+/* Header */
+
 #header {
     display: flex;
     text-align: center;
@@ -72,7 +75,8 @@ html, body {
 }
 
 #main-title {
-    display: inline-block;
+    /* display: inline-block; */
+    width: 100%;
     vertical-align: middle;
 }
 
@@ -80,10 +84,11 @@ html, body {
 
 #body {
     display: block;
-    padding: 32px;
+    padding-left: var(--body-padding-hor);
+    padding-right: var(--body-padding-hor);
 }
 
-#game_board {
+#game-board {
     background-color: rgb(250, 200, 140);
     width: 540px;
     height: 540px;
@@ -91,7 +96,7 @@ html, body {
     position: relative;
 }
 
-.tileDivs {
+.tile-divs {
     height: 30px;
     width: 30px;
     position: absolute;
@@ -114,6 +119,8 @@ html, body {
     background-color: rgb(0, 0, 0, 0.2);
     height: 1px;
     width: 96%;
+    margin-top: 32px;
+    margin-top: 32px;
     margin-left: auto;
     margin-right: auto;
     display: block;
