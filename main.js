@@ -51,6 +51,34 @@ function initBoard() {
     drawBoard(); // erase
 }
 
+function genBoardLines() {
+    console.log("genBoardLine()");
+    function genVerLine() {
+        let line = document.createElement("div");
+        line.setAttribute("class", "board-line-ver");
+        return line;
+    }
+
+    function genHorLine() {
+        let line = document.createElement("div");
+        line.setAttribute("class", "board-line-hor");
+        return line;
+    }
+
+    let gameBoard = document.getElementById("game-board");
+    // Generate grid lines on board
+    for (let i = 0; i < boardSize; ++i) {
+        verLine = genVerLine();
+        verLine.style.left = `${10 + i * 35 + 15}px`;
+        horLine = genHorLine();
+        horLine.style.top = `${10 + i * 35 + 15}px`;
+        gameBoard.appendChild(verLine);
+        gameBoard.appendChild(horLine);
+    }
+}
+
+genBoardLines();
+
 function drawBoard() {
     // Loop each tile, and create a corresponding div, then set it as 
     // child of "game-board" div.
