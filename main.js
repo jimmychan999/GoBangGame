@@ -1,62 +1,24 @@
-console.log("First line in main.js");
-
-const TILE_STATE_EMPTY = 0;
-const TILE_STATE_BLACK = 1;
-const TILE_STATE_WHITE = 2;
-
-var lastStoneColor = 1;
-
-class Tile {
-    constructor(state, x, y) {
-        this.state = state;
-        this.x = x;
-        this.y = y;
-    }
-    isEmpty() {
-        // Return whether this tile is empty (a bool)
-        return this.state == TILE_STATE_EMPTY;
-    }
-    hasBlackPiece() {
-        // Return whether the piece on this tile is black
-        return this.state == TILE_STATE_BLACK;
-    }
-    hasWhitePiece() {
-        return this.state == TILE_STATE_WHITE;
-    }
-}
-
 // Constants
 const EMPTY = 0;
 const BLACK = 1;
 const WHITE = 2;
+const COLOR_STR_TRANSPARENT = "rgba(0, 0, 0, 0)";
 
+// Elements
 const buttonStartGame = document.getElementById("btn-start-game");
 const buttonEndGame = document.getElementById("btn-end-game");
+const gameBoard = document.getElementById("game-board");
 
+
+// Starting parameters
 let isWhoseTurn = BLACK;
 let boardSize = 15;
 let boardEdgeWidth = 10;
 let stoneDiameter = 30;
 let stoneSep = 5;
 
-let board = [];     // Should be a 2D array of Tile
+// Other global variables
 let tileDivs = [];  // 1D array of document elements
-
-function initBoard() {
-    // Set value of board to a 2D array whose size if boardSize * boardSize
-    for (let i = 0; i < boardSize; ++i) {  // loop rows
-        row = []
-        for (let j = 0; j < boardSize; ++j) {  // loop cols
-            tile = new Tile(TILE_STATE_EMPTY, i, j);
-            row.push(tile);
-            console.log(i.toString() + "," + j.toString());
-        }
-        board.push(row);
-    }
-    
-    console.log(board);
-    drawBoard(); // erase
-}
 
 function genBoardLines() {
     let padding = `${boardEdgeWidth + Math.round(stoneDiameter / 2)}px`;
@@ -76,7 +38,6 @@ function genBoardLines() {
         return line;
     }
 
-    let gameBoard = document.getElementById("game-board");
     let boardLinesContainer = document.getElementById("board-lines-container");
     // Generate grid lines on board
     for (let i = 0; i < boardSize; ++i) {
@@ -99,7 +60,6 @@ function drawBoard() {
     // child of "game-board" div.
 
     // Store tile divs in an array for faster access later
-    let gameBoard = document.getElementById("game-board");
     for(let i = 0; i < boardSize; i++) {
         for(let j = 0; j < boardSize; j++) {
             tileDiv = document.createElement("div");
@@ -150,10 +110,6 @@ function isWon(lastPiece) {
     // Check if the given piece participate in a 5-in-a-row
 }
 
-function onClickBoard(x, y) {
-    // This is called when a tile div is clicked
-}
-
 function showBoard() {
     // Set style of board depending on current pieces on the board
 };
@@ -162,24 +118,23 @@ function startGame() {
     // turn all stones to white
     tileDiv = document.getElementsByClassName("tile-divs");
     for (let i = 0; i < tileDiv.length; i++) {
-        tileDiv[i].style.backgroundColor = "rgba(0, 0, 0, 0)";
+        tileDiv[i].style.backgroundColor = COLOR_STR_TRANSPARENT;
     }
-    lastStoneColor = 1;
 
     buttonStartGame.disabled = true;
     buttonEndGame.disabled = false;
     
     // show pulse animation on board
-    document.getElementById('game-board').className = 'start';
+    gameBoard.className = 'start';
 }
 
 function endGame() {
-    document.getElementById('game-board').className = '';
+    gameBoard.className = '';
     buttonStartGame.disabled = false;
     buttonEndGame.disabled = true;
 }
 
 function onLoad() {
     genBoardLines();
-    initBoard();
+    drawBoard();
 }
