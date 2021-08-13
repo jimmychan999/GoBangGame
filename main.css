@@ -3,17 +3,35 @@
     --navbar-height: 64px;
     --navbar-padding-hor: 64px;
     --body-padding-hor: 64px;
-    --footer-color-bg: rgb(60, 60, 60);
+
+    /* colors */
+    --color-bg: rgb(240, 240, 240);
+    --color-text: rgb(50, 50, 50);
+    --color-footer-text: rgb(100, 100, 100);
+    --color-footer-bg: rgb(60, 60, 60);
+    --color-btn: rgb(80, 140, 245);
+    --color-board: rgb(250, 200, 140);
+    --color-board-line: rgb(165, 132, 113);
+    --color-stone-hover: rgba(190, 100, 100, 0.3);
 }
 
-/* The following style applies to HTML <body> tags*/
+/* General */
 html, body {
-    background-color: rgb(240, 240, 240);
+    background-color: var(--color-bg);
     font-family: 'Courier New', Courier, monospace;
-    color: rgb(50, 50, 50);
+    color: var(--color-text);
     margin: 0;
     padding: 0;
     height: 100%;
+}
+
+button {
+    background-color: var(--color-btn);
+    border-width: 0;
+    border-radius: 8px;
+    padding: 8px;
+    margin: 8px;
+    color: white;
 }
 
 #container {
@@ -24,7 +42,7 @@ html, body {
 
 /* Navigation bar */
 
-#navbar {
+#nav-bar {
     display: flex;
     /* width: 100%; */
     height: var(--navbar-height);
@@ -68,6 +86,8 @@ html, body {
     display: flex;
     text-align: center;
     padding: 0px;
+    height: 48px;
+    font-size: 100%;
 }
 
 #header.h1 {
@@ -88,12 +108,38 @@ html, body {
     padding-right: var(--body-padding-hor);
 }
 
+#top-panel {
+    display: flex;
+    padding: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
 #game-board {
-    background-color: rgb(250, 200, 140);
+    background-color: var(--color-board);
     width: 540px;
     height: 540px;
     margin: auto;
     position: relative;
+    border-radius: 12px;
+    box-shadow: 0px 10px 13px -7px #0000009e, 1px 5px 7px -2px rgb(38 38 38 / 15%);
+}
+
+#game-board.start {
+    animation: pulse .3s;
+    animation-iteration-count: 1;
+}
+
+.board-line-ver {
+    width: 1px;
+    position: absolute;
+    background-color: var(--color-board-line);
+}
+
+.board-line-hor {
+    height: 1px;
+    position: absolute;
+    background-color: var(--color-board-line);
 }
 
 .tile-divs {
@@ -101,7 +147,11 @@ html, body {
     width: 30px;
     position: absolute;
     border-radius: 50%;
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.tile-divs:hover {
+    background-color: var(--color-stone-hover);
 }
 
 /* Footer */
@@ -111,8 +161,7 @@ html, body {
     /* height: 100%; */
     padding-left: var(--navbar-padding-hor);
     padding-right: var(--navbar-padding-hor);
-    /* background-color: var(--footer-color-bg); */
-    color: rgb(100, 100, 100)
+    color: var(--color-footer-text);
 }
 
 #footer-line {
@@ -124,4 +173,10 @@ html, body {
     margin-left: auto;
     margin-right: auto;
     display: block;
+}
+
+@keyframes pulse {
+	0% {transform: scale(1);}
+	50% {transform: scale(1.05);}
+	100% {transform: scale(1);}
 }

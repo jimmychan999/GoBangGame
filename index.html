@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>GoBang</title>
+    <title>Go Bang</title>
     <link rel="stylesheet" href="main.css">
 </head>
-<body>
+<body onload="onLoad()">
     <div id="container">
-        <div id="navbar">
+        <div id="nav-bar">
             <!-- Navigation bar that follows the screen down, always showing-->
             <div id="main-logo">
                 <p>[Logo here]</p>
@@ -29,15 +29,23 @@
             <div id="header">
                 <!--Contains title, score, time, etc.-->
                 <div id="main-title">
-                    <h1>GoBang</h1>
+                    <h1>Go Bang</h1>
                 </div>
             </div>
             
-            <button id="btn_start_game" onclick="initBoard()">Start game</button>
-            <div onclick="test()"></div>
-            <!-- board here -->    
-            <div id="game-board">
-                
+            <div id="game-body">
+
+                <div id="top-panel">
+                    <button id="btn-start-game" onclick="startGame()">Start game</button>
+                    <button id="btn-end-game" onclick="endGame()">End game</button>
+                </div>
+                <!-- board here -->    
+                <div id="game-board">
+                    <!-- JS will generate elements here -->
+                </div>
+                <div id="bottom-panel">
+
+                </div>
             </div>
         </div>
 
