@@ -5,7 +5,7 @@
     <title>GoBang</title>
     <link rel="stylesheet" href="main.css">
 </head>
-<body>
+<body onload="initBoard()">
     <div id="container">
         <div id="nav-bar">
             <!-- Navigation bar that follows the screen down, always showing-->
@@ -36,7 +36,7 @@
             <div id="game-body">
 
                 <div id="top-panel">
-                    <button id="btn-start-game" onclick="initBoard()">Start game</button>
+                    <button id="btn-start-game" onclick="startGame()">Start game</button>
                     <button id="btn-end-game" onclick="endGame()">End game</button>
                 </div>
                 <!-- board here -->    

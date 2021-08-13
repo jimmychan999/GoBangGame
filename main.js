@@ -150,3 +150,7 @@ function onClickBoard(x, y) {
 function showBoard() {
     // Set style of board depending on current pieces on the board
 };
+
+function startGame() {
+    // turn all stones to white
+}
