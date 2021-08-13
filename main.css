@@ -5,15 +5,19 @@
     --body-padding-hor: 64px;
 
     /* colors */
-    --footer-color-bg: rgb(60, 60, 60);
-    --color-btn: rgb(120, 160, 245);
+    --color-bg: rgb(240, 240, 240);
+    --color-text: rgb(50, 50, 50);
+    --color-footer-text: rgb(100, 100, 100);
+    --color-footer-bg: rgb(60, 60, 60);
+    --color-btn: rgb(80, 140, 245);
+    --color-board: rgb(250, 200, 140);
 }
 
 /* General */
 html, body {
-    background-color: rgb(240, 240, 240);
+    background-color: var(--color-bg);
     font-family: 'Courier New', Courier, monospace;
-    color: rgb(50, 50, 50);
+    color: var(--color-text);
     margin: 0;
     padding: 0;
     height: 100%;
@@ -21,7 +25,7 @@ html, body {
 
 button {
     background-color: var(--color-btn);
-    border: rgb(100, 100, 120);
+    border-width: 0;
     border-radius: 8px;
     padding: 8px;
     margin: 8px;
@@ -110,7 +114,7 @@ button {
 }
 
 #game-board {
-    background-color: rgb(250, 200, 140);
+    background-color: var(--color-board);
     width: 540px;
     height: 540px;
     margin: auto;
@@ -134,8 +138,7 @@ button {
     /* height: 100%; */
     padding-left: var(--navbar-padding-hor);
     padding-right: var(--navbar-padding-hor);
-    /* background-color: var(--footer-color-bg); */
-    color: rgb(100, 100, 100)
+    color: var(--color-footer-text);
 }
 
 #footer-line {
