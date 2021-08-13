@@ -26,8 +26,12 @@ class Tile {
 }
 
 // Constants
-const BLACK = 0;
-const WHITE = 1;
+const EMPTY = 0;
+const BLACK = 1;
+const WHITE = 2;
+
+const buttonStartGame = document.getElementById("btn-start-game");
+const buttonEndGame = document.getElementById("btn-end-game");
 
 let isWhoseTurn = BLACK;
 let boardSize = 15;
@@ -39,7 +43,6 @@ let board = [];     // Should be a 2D array of Tile
 let tileDivs = [];  // 1D array of document elements
 
 function initBoard() {
-    console.log("initBoard()");
     // Set value of board to a 2D array whose size if boardSize * boardSize
     for (let i = 0; i < boardSize; ++i) {  // loop rows
         row = []
@@ -162,6 +165,9 @@ function startGame() {
         tileDiv[i].style.backgroundColor = "rgba(0, 0, 0, 0)";
     }
     lastStoneColor = 1;
+
+    buttonStartGame.disabled = true;
+    buttonEndGame.disabled = false;
     
     // show pulse animation on board
     document.getElementById('game-board').className = 'start';
@@ -169,6 +175,8 @@ function startGame() {
 
 function endGame() {
     document.getElementById('game-board').className = '';
+    buttonStartGame.disabled = false;
+    buttonEndGame.disabled = true;
 }
 
 function onLoad() {
