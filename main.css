@@ -121,7 +121,9 @@ button {
     margin: auto;
     position: relative;
     border-radius: 4px;
-    box-shadow: 0px 0px 8px 2px rgb(0, 0, 0, 0.3);
+    /* box-shadow: 0px 0px 8px 2px rgb(0, 0, 0, 0.3); */
+    box-shadow: 0px 10px 13px -7px #0000009e, 1px 5px 7px -2px rgb(38 38 38 / 15%);
+    border: 5px solid var(--color-board);
 }
 
 .board-line-ver {
