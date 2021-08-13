@@ -111,29 +111,12 @@ function putStoneAt(x, y) {
 }
 
 function modifyStoneColor(x, y) {
-    // let tile = document.getElementById("tile: " + xtile + "," + ytile);
     let tile = getTileDiv(x, y);
-    console.log(x * boardSize + y);
-    console.log(tileDivs.length);
-    console.log(tile);
-    // alert(color)
     if (isWhoseTurn == BLACK) {
         tile.style.backgroundColor = "black";
     } else if (isWhoseTurn == WHITE) {
         tile.style.backgroundColor = "white";
     }
-    // if (lastStoneColor % 2 == 1) {
-    //     tile.style.backgroundColor = "black";
-    // }
-    // if (lastStoneColor % 2 == 0) {
-    //     // alert("heakjlfksd")}
-    //     tile.style.backgroundColor = "white";
-    // }
-    // lastStoneColor++;
-    // }
-    // else {
-    //     tile.style.background-color == "transparent"
-    // }
 }
 
 function nextTurn() {
