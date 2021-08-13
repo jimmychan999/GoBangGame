@@ -31,6 +31,9 @@ const WHITE = 1;
 
 let isWhoseTurn = BLACK;
 let boardSize = 15;
+let boardEdgeWidth = 10;
+let stoneDiameter = 30;
+let stoneSep = 5;
 
 let board = [];     // Should be a 2D array of Tile
 let tileDivs = [];  // 1D array of document elements
@@ -53,32 +56,40 @@ function initBoard() {
 }
 
 function genBoardLines() {
-    console.log("genBoardLine()");
+    let padding = `${boardEdgeWidth + Math.round(stoneDiameter / 2)}px`;
     function genVerLine() {
         let line = document.createElement("div");
         line.setAttribute("class", "board-line-ver");
+        line.style.top = padding;
+        line.style.bottom = padding;
         return line;
     }
 
     function genHorLine() {
         let line = document.createElement("div");
         line.setAttribute("class", "board-line-hor");
+        line.style.left = padding;
+        line.style.right = padding;
         return line;
     }
 
     let gameBoard = document.getElementById("game-board");
+    let boardLinesContainer = document.getElementById("board-lines-container");
     // Generate grid lines on board
     for (let i = 0; i < boardSize; ++i) {
-        verLine = genVerLine();
-        verLine.style.left = `${10 + i * 35 + 15}px`;
-        horLine = genHorLine();
-        horLine.style.top = `${10 + i * 35 + 15}px`;
-        gameBoard.appendChild(verLine);
+        // boardLinesContainer.appendChild(verLine);
+        // boardLinesContainer.appendChild(horLine);
+        
+        
+        let offset = `${boardEdgeWidth + i * (stoneDiameter + stoneSep) + Math.round(stoneDiameter / 2)}px`;
+        let verLine = genVerLine();
+        let horLine = genHorLine();
+        verLine.style.left = offset;
+        horLine.style.top = offset;
         gameBoard.appendChild(horLine);
+        gameBoard.appendChild(verLine);
     }
 }
-
-genBoardLines();
 
 function drawBoard() {
     // Loop each tile, and create a corresponding div, then set it as 
@@ -90,8 +101,8 @@ function drawBoard() {
         for(let j = 0; j < boardSize; j++) {
             tileDiv = document.createElement("div");
             tileDiv.setAttribute("class", "tile-divs");
-            tileDiv.style.left = `${10 + j * 35}px`;
-            tileDiv.style.top = `${10 + i * 35}px`;
+            tileDiv.style.left = `${boardEdgeWidth + j * (stoneDiameter + stoneSep)}px`;
+            tileDiv.style.top = `${boardEdgeWidth + i * (stoneDiameter + stoneSep)}px`;
             tileDiv.setAttribute("id", "tile: " + i.toString() + "," + j.toString());
             tileDiv.setAttribute("onclick", `putStoneAt(${i}, ${j})`);
             tileDivs.push(tileDiv);  // The index of this element is (i * boardSize + j)
@@ -151,4 +162,9 @@ function startGame() {
         tileDiv[i].style.backgroundColor = "rgba(0, 0, 0, 0)";
     }
     lastStoneColor = 1;
+}
+
+function onLoad() {
+    genBoardLines();
+    initBoard();
 }
