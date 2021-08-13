@@ -162,6 +162,13 @@ function startGame() {
         tileDiv[i].style.backgroundColor = "rgba(0, 0, 0, 0)";
     }
     lastStoneColor = 1;
+    
+    // show pulse animation on board
+    document.getElementById('game-board').className = 'start';
+}
+
+function endGame() {
+    document.getElementById('game-board').className = '';
 }
 
 function onLoad() {
