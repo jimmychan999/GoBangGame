@@ -2,9 +2,18 @@
 const EMPTY = 0;
 const BLACK = 1;
 const WHITE = 2;
+
+// CSS constants
 const COLOR_STR_TRANSPARENT = "rgba(0, 0, 0, 0)";
 const COLOR_STR_WHITE = "rgb(245, 245, 245)";
 const COLOR_STR_BLACK = "rgb(100, 100, 100)";
+const COLOR_STR_HIGHLIGHT_WHITE = "rgba(245, 245, 245, .35)";
+const COLOR_STR_HIGHLIGHT_BLACK = "rgba(100, 100, 100, .35)";
+const BOX_SHADOW = "1px 5px 7px -2px rgb(38 38 38 / 15%), 0px 10px 13px -7px #0000009e";
+const BOX_SHADOW_BLACK_STONE = "inset -10px -6px 16px rgba(0, 0, 0, 0.8), " + BOX_SHADOW;
+const BOX_SHADOW_WHITE_STONE = "inset -5px -3px 8px rgba(0, 0, 0, 0.3), " + BOX_SHADOW;
+const BACKGROUND_IMAGE_STONE = "inset -5px -3px 8px rgba(0, 0, 0, 0.3)";
+
 
 // Elements
 const buttonStartGame = document.getElementById("btn-start-game");
@@ -89,6 +98,25 @@ function genTileDivs() {
             tileDiv.style.top = `${boardEdgeWidth + i * (stoneDiameter + stoneSep)}px`;
             tileDiv.setAttribute("id", "tile: " + i.toString() + "," + j.toString());
             tileDiv.setAttribute("onclick", `onClickDivAt(${i}, ${j})`);
+
+            let onMouseEnter = (e) => {
+                if (board[i][j] == EMPTY) {
+                    if (isWhoseTurn == BLACK) {
+                        e.target.style.backgroundColor = COLOR_STR_HIGHLIGHT_BLACK;
+                    } else {
+                        e.target.style.backgroundColor = COLOR_STR_HIGHLIGHT_WHITE;
+                    }
+                }
+            };
+            let onMouseLeave = (e) => {
+                if (board[i][j] == EMPTY) {
+                    e.target.style.backgroundColor = COLOR_STR_TRANSPARENT;
+                }
+            };
+
+            tileDiv.addEventListener('mouseenter', onMouseEnter);
+            tileDiv.addEventListener('mouseleave', onMouseLeave);
+
             tileDivs.push(tileDiv);  // The index of this element is (i * boardSize + j)
         }
     }
@@ -114,13 +142,13 @@ function putStoneAt(x, y) {
     let tile = getTileDiv(x, y);
     if (isWhoseTurn == BLACK) {
         tile.style.backgroundColor = COLOR_STR_BLACK;
-        tile.style.boxShadow = "inset -10px -6px 16px rgba(0, 0, 0, 0.8)";
-        tile.backgroundImage = "linear-gradient(-45deg, rgba(255,255,220,.3) 0%, transparent 100%)";
+        tile.style.boxShadow = BOX_SHADOW_BLACK_STONE;
+        tile.backgroundImage = BACKGROUND_IMAGE_STONE;
         board[x][y] = BLACK;
     } else if (isWhoseTurn == WHITE) {
         tile.style.backgroundColor = COLOR_STR_WHITE;
-        tile.style.boxShadow = "inset -5px -3px 8px rgba(0, 0, 0, 0.3)";
-        tile.backgroundImage = "linear-gradient(-45deg, rgba(255,255,220,.3) 0%, transparent 100%)";
+        tile.style.boxShadow = BOX_SHADOW_WHITE_STONE;
+        tile.backgroundImage = BACKGROUND_IMAGE_STONE;
         board[x][y] = WHITE;
     }
 }
