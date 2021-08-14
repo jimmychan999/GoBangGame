@@ -2,6 +2,8 @@
 const EMPTY = 0;
 const BLACK = 1;
 const WHITE = 2;
+const THEME_LIGHT = "light";
+const THEME_DARK = "dark";
 
 // CSS constants
 const COLOR_STR_TRANSPARENT = "rgba(0, 0, 0, 0)";
@@ -22,6 +24,7 @@ const gameBoard = document.getElementById("game-board");
 
 
 // Starting parameters
+let curTheme = THEME_LIGHT;
 let isWhoseTurn = BLACK;
 let boardSize = 19;
 let boardEdgeWidth = 10;
@@ -180,6 +183,17 @@ function hideBoardStones() {
         tileDiv.style.boxShadow = "0 0 0 0 rgba(0,0,0,0)";
     }
 }
+
+function changeTheme() {
+    if (curTheme == THEME_LIGHT) {
+        curTheme = THEME_DARK;
+    } else {
+        curTheme = THEME_LIGHT;
+    }
+
+    document.getElementById("theme-switcher").href = "./themes/" + curTheme + ".css";
+}
+
 
 function clearBoard() {
     setBoardArrayEmpty();

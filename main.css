@@ -3,19 +3,6 @@
     --navbar-height: 64px;
     --navbar-padding-hor: 64px;
     --body-padding-hor: 64px;
-
-    /* colors */
-    
-    --color-bg: rgb(240, 240, 240);
-    --color-bg-navbar: rgb(255, 255, 255);
-    --color-text: rgb(50, 50, 50);
-    --color-footer-text: rgb(140, 140, 140);
-    --color-footer-bg: rgb(60, 60, 60);
-    --color-btn: rgb(80, 140, 245);
-    --color-btn-disabled: rgba(154, 169, 218, 0.493);
-    --color-board: rgb(250, 200, 140);
-    --color-board-line: rgb(165, 132, 113);
-    --color-stone-hover: rgba(190, 100, 100, 0.3);
 }
 
 /* General */
@@ -34,7 +21,7 @@ button {
     border-radius: 8px;
     padding: 8px;
     margin: 8px;
-    color: white;
+    color: var(--color-btn-text);
     font-weight: bold;
 }
 
@@ -195,7 +182,7 @@ button:disabled {
 }
 
 #footer-line {
-    background-color: rgb(0, 0, 0, 0.2);
+    background-color: var(--color-footer-line);
     height: 1px;
     width: 96%;
     margin-top: 32px;

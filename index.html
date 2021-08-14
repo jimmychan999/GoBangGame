@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Go Bang</title>
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" id="theme-switcher" href="./themes/light.css">
 </head>
 <body onload="onLoad()">
     <div id="container">
@@ -36,7 +37,7 @@
 
                 <div id="top-panel">
                     <div id="top-panel-left" class="top-panel-item">
-                        
+                        <button id="btn-change-theme" onclick="changeTheme()">Change theme</button>
                     </div>
                     <div id="top-panel-center" class="top-panel-item">
                         <button id="btn-start-game" onclick="startGame()">Start game</button>
