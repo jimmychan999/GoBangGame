@@ -26,18 +26,27 @@
         </div>
         
         <div id="body">
-            <div id="header">
-                <!--Contains title, score, time, etc.-->
+            <!-- <div id="header">
                 <div id="main-title">
                     <h1>Go Bang</h1>
                 </div>
-            </div>
+            </div> -->
             
             <div id="game-body">
 
                 <div id="top-panel">
-                    <button id="btn-start-game" onclick="startGame()">Start game</button>
-                    <button id="btn-end-game" disabled onclick="endGame()">End game</button>
+                    <div id="top-panel-left" class="top-panel-item">
+                        
+                    </div>
+                    <div id="top-panel-center" class="top-panel-item">
+                        <button id="btn-start-game" onclick="startGame()">Start game</button>
+                        <button id="btn-end-game" disabled onclick="endGame()">End game</button>
+                    </div>
+                    <div id="top-panel-right" class="top-panel-item">
+                        <div id="timer">
+                            <p>00:00</p> 
+                        </div>
+                    </div>
                 </div>
                 <!-- board here -->    
                 <div id="game-board">
