@@ -215,6 +215,11 @@ function endGame() {
     buttonEndGame.disabled = true;
 }
 
+function goToMainMenu() {
+    console.log("backToMainMenu()");
+    window.location.href = "index.html";
+}
+
 function onLoad() {
     initBoard();
 }
