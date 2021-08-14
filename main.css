@@ -1,8 +1,11 @@
 /* variables */
 :root {
-    --navbar-height: 64px;
-    --navbar-padding-hor: 64px;
+    --nav-bar-height: 64px;
+    --nav-bar-padding-hor: 64px;
+    --nav-menu-items-height: 24px;
+    
     --body-padding-hor: 64px;
+
 }
 
 /* General */
@@ -18,7 +21,7 @@ html, body {
 button {
     background-color: var(--color-btn);
     border-width: 0;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 8px;
     margin: 8px;
     color: var(--color-btn-text);
@@ -27,6 +30,13 @@ button {
 
 button:disabled {
     background-color: var(--color-btn-disabled);
+    color: var(--color-btn-text-disabled);
+}
+
+a {
+    color: var(--text);
+    font-style: normal;
+    text-decoration: none;
 }
 
 #container {
@@ -40,13 +50,13 @@ button:disabled {
 #nav-bar {
     display: flex;
     /* width: 100%; */
-    height: var(--navbar-height);
-    background-color: var(--color-bg-navbar);
+    height: var(--nav-bar-height);
+    background-color: var(--color-bg-nav-bar);
     box-shadow: 0 2px 4px 0 rgb(0, 0, 0, 0.2);
     margin-top: 0px;
     /* margin-bottom: 2rem; */
-    padding-left: var(--navbar-padding-hor);
-    padding-right: var(--navbar-padding-hor);
+    padding-left: var(--nav-bar-padding-hor);
+    padding-right: var(--nav-bar-padding-hor);
     vertical-align: middle;
 }
 
@@ -54,14 +64,14 @@ button:disabled {
     display: inline-flex;
     font-size: 14px;
     margin: 0px;
-    width: var(--navbar-height);
-    height: var(--navbar-height);
+    width: var(--nav-bar-height);
+    height: var(--nav-bar-height);
     top: 0px;
 }
 
 #nav-menu {
     display: flex;
-    height: var(--navbar-height);
+    height: var(--nav-bar-height);
     margin-left: auto;
     margin-right: 0px;
     right: 0px;
@@ -69,10 +79,28 @@ button:disabled {
 
 .nav-menu-items {
     display: flex;
-    padding-left: 12px;
-    padding-right: 12px;
+    position: relative;
+    height: var(--nav-menu-items-height);
+    vertical-align: middle;
+    padding: 0px;
     margin-top: auto;
     margin-bottom: auto;
+    border-radius: 8px;
+    background-color: var(--color-bg-nav-bar);
+}
+
+.nav-menu-items a {
+    padding-left: 12px;
+    padding-right: 12px;
+    line-height: var(--nav-menu-items-height);
+    vertical-align: middle;
+    background-color: var(--color-bg-nav-bar);
+    border-radius: 6px;
+}
+
+.nav-menu-items a:hover {
+    background-color: var(--color-bg-nav-menu-items-hover);
+    color: var(--color-text-nav-menu-items-hover);
 }
 
 /* Header */
@@ -176,8 +204,8 @@ button:disabled {
 #footer {
     margin: 0;
     /* height: 100%; */
-    padding-left: var(--navbar-padding-hor);
-    padding-right: var(--navbar-padding-hor);
+    padding-left: var(--nav-bar-padding-hor);
+    padding-right: var(--nav-bar-padding-hor);
     color: var(--color-footer-text);
 }
 

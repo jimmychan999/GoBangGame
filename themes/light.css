@@ -1,7 +1,10 @@
 :root {
     --color-bg: rgb(240, 240, 240);
-    --color-bg-navbar: rgb(255, 255, 255);
+    --color-bg-nav-bar: rgb(255, 255, 255);
     --color-text: rgb(50, 50, 50);
+
+    --color-bg-nav-menu-items-hover: rgb(76, 76, 206);
+    --color-text-nav-menu-items-hover: rgb(255, 255, 255);
 
     --color-footer-text: rgb(140, 140, 140);
     --color-footer-bg: rgb(60, 60, 60);
@@ -10,6 +13,7 @@
     --color-btn: rgb(80, 140, 245);
     --color-btn-disabled: rgba(154, 169, 218, 0.493);
     --color-btn-text: rgb(255, 255, 255);
+    --color-btn-text-disabled: rgba(255, 255, 255, 0.6);
     
     --color-board: rgb(250, 200, 140);
     --color-board-line: rgb(165, 132, 113);

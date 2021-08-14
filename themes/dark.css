@@ -1,14 +1,19 @@
 :root {
     --color-bg: rgb(48, 48, 48);
-    --color-bg-navbar: rgb(77, 77, 77);
     --color-text: rgb(209, 209, 209);
+    --color-bg-nav-bar: rgb(77, 77, 77);
+    --color-bg-nav-menu-items-hover: rgb(148, 148, 255);
+    --color-text-nav-menu-items-hover: rgb(49, 49, 49);
     
     --color-footer-text: rgb(140, 140, 140);
     --color-footer-bg: rgb(60, 60, 60);
     --color-footer-line: rgba(255, 255, 255, 0.4);
 
     --color-btn: rgb(80, 140, 245);
-    --color-btn-disabled: rgba(154, 169, 218, 0.493);
+    --color-btn-disabled: rgba(80, 140, 245, 0.3);
+    --color-btn-text: rgb(255, 255, 255);
+    --color-btn-text-disabled: rgba(255, 255, 255, 0.7);
+
     --color-board: rgb(250, 200, 140);
     --color-board-line: rgb(165, 132, 113);
     --color-stone-hover: rgba(190, 100, 100, 0.3);
