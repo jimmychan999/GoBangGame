@@ -93,8 +93,8 @@ function setBoardArrayEmpty() {
 
 function genTileDivs() {
     // Store tile divs in an array for faster access later
-    for(let i = 0; i < boardSize; i++) {
-        for(let j = 0; j < boardSize; j++) {
+    for (let i = 0; i < boardSize; i++) {
+        for (let j = 0; j < boardSize; j++) {
             tileDiv = document.createElement("div");
             tileDiv.setAttribute("class", "tile-divs");
             tileDiv.style.left = `${boardEdgeWidth + j * (stoneDiameter + stoneSep)}px`;
@@ -137,6 +137,7 @@ function isTileOccupied(x, y) {
 function onClickDivAt(x, y) {
     if (!isTileOccupied(x, y)) {
         putStoneAt(x, y);
+        isWon(x, y);
         nextTurn();
     }
 }
@@ -169,8 +170,100 @@ function getTileDiv(x, y) {
     return tileDivs[x * boardSize + y];
 }
 
-function isWon(lastPiece) {
+function isWon(x, y) {
     // Check if the given piece participate in a 5-in-a-row
+    // empty, out of board (negative and bigger than length)
+    
+    if (checkDirectionWin(x, y)) {
+        if (board[x][y] == BLACK) {
+            alert("BLACK won")
+        } else {
+            alert("WHITE won")
+        }
+    }
+}
+
+function checkDirectionWin(x, y) {
+    
+    let CurrentStoneColor = board[x][y];
+    let stoneConsecCountHori = 1;
+    let stoneConsecCountVert = 1;
+    let stoneConsecCountDiagonal1 = 1;
+    let stoneConsecCountDiagonal2 = 1;
+
+    // checking 5 horizontally
+    for(let i = 1; i < 5; ++i) {
+        if (!isTileOccupied(x, y+i) || board[x][y+i] != CurrentStoneColor) {
+            break;
+        }
+        stoneConsecCountHori++
+    }
+    for(let i = 1; i < 5; ++i) {
+        if (!isTileOccupied(x, y-i) || board[x][y-i] != CurrentStoneColor) {
+            break;
+        }
+        stoneConsecCountHori++
+    }
+
+    console.log(stoneConsecCountHori + "h");
+    if (stoneConsecCountHori >= 5) {
+        return true;
+    }
+
+    // checking 5 vertically
+    for(let i = 1; i < 5; ++i) {
+        if (!isTileOccupied(x+i, y) || board[x+i][y] != CurrentStoneColor) {
+            break;
+        }
+        stoneConsecCountVert++
+    }
+    for(let i = 1; i < 5; ++i) {
+        if (!isTileOccupied(x-i, y) || board[x-i][y] != CurrentStoneColor) {
+            break;
+        }
+        stoneConsecCountVert++
+    }
+    console.log(stoneConsecCountVert + "v");
+    if (stoneConsecCountVert >= 5) {
+        return true;
+    }
+
+    // checking horizontal left top
+    for(let i = 1; i < 5; ++i) {
+        if (!isTileOccupied(x+i, y+i) || board[x+i][y+i] != CurrentStoneColor) {
+            break;
+        }
+        stoneConsecCountDiagonal1++
+    }
+    for(let i = 1; i < 5; ++i) {
+        if (!isTileOccupied(x-i, y-i) || board[x-i][y-i] != CurrentStoneColor) {
+            break;
+        }
+        stoneConsecCountDiagonal1++
+    }
+    console.log(stoneConsecCountDiagonal1 + "d1");
+    if (stoneConsecCountDiagonal1 >= 5) {
+        return true;
+    }
+
+    // checking horizontal right top
+    for(let i = 1; i < 5; ++i) {
+        if (!isTileOccupied(x+i, y-i) || board[x+i][y-i] != CurrentStoneColor) {
+            break;
+        }
+        stoneConsecCountDiagonal2++
+    }
+    for(let i = 1; i < 5; ++i) {
+        if (!isTileOccupied(x-i, y+i) || board[x-i][y+i] != CurrentStoneColor) {
+            break;
+        }
+        stoneConsecCountDiagonal2++
+    }
+    console.log(stoneConsecCountDiagonal2 + "d2");
+    if (stoneConsecCountDiagonal2 >= 5) {
+        return true;
+    }
+
 }
 
 function showBoard() {
@@ -223,3 +316,8 @@ function goToMainMenu() {
 function onLoad() {
     initBoard();
 }
+
+
+
+// add clicking sound effects
+
