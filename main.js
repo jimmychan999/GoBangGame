@@ -81,8 +81,8 @@ function setBoardArrayEmpty() {
 
 function genTileDivs() {
     // Store tile divs in an array for faster access later
-    for(let i = 0; i < boardSize; i++) {
-        for(let j = 0; j < boardSize; j++) {
+    for (let i = 0; i < boardSize; i++) {
+        for (let j = 0; j < boardSize; j++) {
             tileDiv = document.createElement("div");
             tileDiv.setAttribute("class", "tile-divs");
             tileDiv.style.left = `${boardEdgeWidth + j * (stoneDiameter + stoneSep)}px`;
@@ -106,6 +106,7 @@ function isTileOccupied(x, y) {
 function onClickDivAt(x, y) {
     if (!isTileOccupied(x, y)) {
         putStoneAt(x, y);
+        isWon(x, y);
         nextTurn();
     }
 }
@@ -138,8 +139,25 @@ function getTileDiv(x, y) {
     return tileDivs[x * boardSize + y];
 }
 
-function isWon(lastPiece) {
+function isWon(x, y) {
     // Check if the given piece participate in a 5-in-a-row
+    // empty, out of board (negative and bigger than length)
+    let CurrentStoneColor = board[x][y];
+    let stoneCountInARow = 1;
+    for(let i = 1; i < 5; ++i) {
+        if (!isTileOccupied(x, y+i) || board[x][y+i] != CurrentStoneColor) {
+            break;
+        }
+        stoneCountInARow++
+    }
+    console.log(stoneCountInARow);
+    if (stoneCountInARow == 5) {
+        if (CurrentStoneColor == BLACK) {
+            alert("Black won")
+        } else {
+            alert("White won")
+        }
+    }
 }
 
 function showBoard() {
