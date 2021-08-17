@@ -218,14 +218,11 @@ function checkDirectionWin(x, y) {
         }
         stoneConsecCountHori++
     }
-
-    console.log(stoneConsecCountHori + "h");
     if (stoneConsecCountHori >= 5) {
         return true;
     }
 
     // checking 5 vertically
-    console.log("vertical, x: " + x + " y: " + y);
     for(let i = 1; i < 5; ++i) {
         if (isOutOfBounds(x+i, y)) {
             break;
@@ -244,13 +241,11 @@ function checkDirectionWin(x, y) {
         }
         stoneConsecCountVert++
     }
-    console.log(stoneConsecCountVert + "v");
     if (stoneConsecCountVert >= 5) {
         return true;
     }
 
     // checking diagonal left top
-    console.log("diagonal letf top, x: " + x + " y: " + y);
     for(let i = 1; i < 5; ++i) {
         if (isOutOfBounds(x+i, y+i)) {
             break;
@@ -269,13 +264,11 @@ function checkDirectionWin(x, y) {
         }
         stoneConsecCountDiagonal1++
     }
-    console.log(stoneConsecCountDiagonal1 + "d1");
     if (stoneConsecCountDiagonal1 >= 5) {
         return true;
     }
 
     // checking diagonal right top
-    console.log("diagonal right top, x: " + x + " y: " + y);
     for(let i = 1; i < 5; ++i) {
         if (isOutOfBounds(x+i, y-i)) {
             break;
@@ -294,7 +287,6 @@ function checkDirectionWin(x, y) {
         }
         stoneConsecCountDiagonal2++
     }
-    console.log(stoneConsecCountDiagonal2 + "d2");
     if (stoneConsecCountDiagonal2 >= 5) {
         return true;
     }
