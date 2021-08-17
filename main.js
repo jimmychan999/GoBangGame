@@ -223,7 +223,6 @@ function checkDirectionWin(x, y) {
     }
 
     // checking 5 vertically
-    console.log("vertical, x: " + x + " y: " + y);
     for(let i = 1; i < 5; ++i) {
         if (isOutOfBounds(x+i, y)) {
             break;
