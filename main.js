@@ -176,16 +176,24 @@ function isWon(x, y) {
     
     if (checkDirectionWin(x, y)) {
         if (board[x][y] == BLACK) {
-            alert("BLACK won")
+            setTimeout(function() {
+                alert("BLACK won")
+            }, 10)
         } else {
-            alert("WHITE won")
+            setTimeout(function() {
+                alert("WHITE won")
+            }, 10)
         }
     }
 }
 
+function isOutOfBounds(x, y) {
+    return (x < 0 || x >= boardSize || y < 0 || y >= boardSize)
+}
+
 function checkDirectionWin(x, y) {
     
-    let CurrentStoneColor = board[x][y];
+    let currentStoneColor = board[x][y];
     let stoneConsecCountHori = 1;
     let stoneConsecCountVert = 1;
     let stoneConsecCountDiagonal1 = 1;
@@ -193,13 +201,19 @@ function checkDirectionWin(x, y) {
 
     // checking 5 horizontally
     for(let i = 1; i < 5; ++i) {
-        if (!isTileOccupied(x, y+i) || board[x][y+i] != CurrentStoneColor) {
+        if (isOutOfBounds(x, y+i)) {
+            break;
+        }
+        if (!isTileOccupied(x, y+i) || board[x][y+i] != currentStoneColor) {
             break;
         }
         stoneConsecCountHori++
     }
     for(let i = 1; i < 5; ++i) {
-        if (!isTileOccupied(x, y-i) || board[x][y-i] != CurrentStoneColor) {
+        if (isOutOfBounds(x, y-i)) {
+            break;
+        }
+        if (!isTileOccupied(x, y-i) || board[x][y-i] != currentStoneColor) {
             break;
         }
         stoneConsecCountHori++
@@ -211,14 +225,21 @@ function checkDirectionWin(x, y) {
     }
 
     // checking 5 vertically
+    console.log("vertical, x: " + x + " y: " + y);
     for(let i = 1; i < 5; ++i) {
-        if (!isTileOccupied(x+i, y) || board[x+i][y] != CurrentStoneColor) {
+        if (isOutOfBounds(x+i, y)) {
+            break;
+        }
+        if (!isTileOccupied(x+i, y) || board[x+i][y] != currentStoneColor) {
             break;
         }
         stoneConsecCountVert++
     }
     for(let i = 1; i < 5; ++i) {
-        if (!isTileOccupied(x-i, y) || board[x-i][y] != CurrentStoneColor) {
+        if (isOutOfBounds(x-i, y)) {
+            break;
+        }
+        if (!isTileOccupied(x-i, y) || board[x-i][y] != currentStoneColor) {
             break;
         }
         stoneConsecCountVert++
@@ -228,15 +249,22 @@ function checkDirectionWin(x, y) {
         return true;
     }
 
-    // checking horizontal left top
+    // checking diagonal left top
+    console.log("diagonal letf top, x: " + x + " y: " + y);
     for(let i = 1; i < 5; ++i) {
-        if (!isTileOccupied(x+i, y+i) || board[x+i][y+i] != CurrentStoneColor) {
+        if (isOutOfBounds(x+i, y+i)) {
+            break;
+        }
+        if (!isTileOccupied(x+i, y+i) || board[x+i][y+i] != currentStoneColor) {
             break;
         }
         stoneConsecCountDiagonal1++
     }
     for(let i = 1; i < 5; ++i) {
-        if (!isTileOccupied(x-i, y-i) || board[x-i][y-i] != CurrentStoneColor) {
+        if (isOutOfBounds(x-i, y-i)) {
+            break;
+        }
+        if (!isTileOccupied(x-i, y-i) || board[x-i][y-i] != currentStoneColor) {
             break;
         }
         stoneConsecCountDiagonal1++
@@ -246,15 +274,22 @@ function checkDirectionWin(x, y) {
         return true;
     }
 
-    // checking horizontal right top
+    // checking diagonal right top
+    console.log("diagonal right top, x: " + x + " y: " + y);
     for(let i = 1; i < 5; ++i) {
-        if (!isTileOccupied(x+i, y-i) || board[x+i][y-i] != CurrentStoneColor) {
+        if (isOutOfBounds(x+i, y-i)) {
+            break;
+        }
+        if (!isTileOccupied(x+i, y-i) || board[x+i][y-i] != currentStoneColor) {
             break;
         }
         stoneConsecCountDiagonal2++
     }
     for(let i = 1; i < 5; ++i) {
-        if (!isTileOccupied(x-i, y+i) || board[x-i][y+i] != CurrentStoneColor) {
+        if (isOutOfBounds(x-i, y+i)) {
+            break;
+        }
+        if (!isTileOccupied(x-i, y+i) || board[x-i][y+i] != currentStoneColor) {
             break;
         }
         stoneConsecCountDiagonal2++
