@@ -241,13 +241,11 @@ function checkDirectionWin(x, y) {
         }
         stoneConsecCountVert++
     }
-    console.log(stoneConsecCountVert + "v");
     if (stoneConsecCountVert >= 5) {
         return true;
     }
 
     // checking diagonal left top
-    console.log("diagonal letf top, x: " + x + " y: " + y);
     for(let i = 1; i < 5; ++i) {
         if (isOutOfBounds(x+i, y+i)) {
             break;
