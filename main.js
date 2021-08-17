@@ -264,13 +264,11 @@ function checkDirectionWin(x, y) {
         }
         stoneConsecCountDiagonal1++
     }
-    console.log(stoneConsecCountDiagonal1 + "d1");
     if (stoneConsecCountDiagonal1 >= 5) {
         return true;
     }
 
     // checking diagonal right top
-    console.log("diagonal right top, x: " + x + " y: " + y);
     for(let i = 1; i < 5; ++i) {
         if (isOutOfBounds(x+i, y-i)) {
             break;
@@ -289,7 +287,6 @@ function checkDirectionWin(x, y) {
         }
         stoneConsecCountDiagonal2++
     }
-    console.log(stoneConsecCountDiagonal2 + "d2");
     if (stoneConsecCountDiagonal2 >= 5) {
         return true;
     }
