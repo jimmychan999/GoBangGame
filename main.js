@@ -224,13 +224,16 @@ function checkDirectionWin(x, y) {
     // checking 5 vertically
     console.log("vertical, x: " + x + " y: " + y);
     for(let i = 1; i < 5; ++i) {
+        if (isOutOfBounds(x+i, y)) {
+            break;
+        }
         if (!isTileOccupied(x+i, y) || board[x+i][y] != currentStoneColor) {
             break;
         }
         stoneConsecCountVert++
     }
     for(let i = 1; i < 5; ++i) {
-        if (isOutOfBounds(x)) {
+        if (isOutOfBounds(x-i, y)) {
             break;
         }
         if (!isTileOccupied(x-i, y) || board[x-i][y] != currentStoneColor) {
@@ -246,7 +249,7 @@ function checkDirectionWin(x, y) {
     // checking diagonal left top
     console.log("diagonal letf top, x: " + x + " y: " + y);
     for(let i = 1; i < 5; ++i) {
-        if (isOutOfBounds(x+i)) {
+        if (isOutOfBounds(x+i, y+i)) {
             break;
         }
         if (!isTileOccupied(x+i, y+i) || board[x+i][y+i] != currentStoneColor) {
@@ -255,7 +258,7 @@ function checkDirectionWin(x, y) {
         stoneConsecCountDiagonal1++
     }
     for(let i = 1; i < 5; ++i) {
-        if (isOutOfBounds(x-i)) {
+        if (isOutOfBounds(x-i, y-i)) {
             break;
         }
         if (!isTileOccupied(x-i, y-i) || board[x-i][y-i] != currentStoneColor) {
