@@ -185,7 +185,7 @@ function isWon(x, y) {
 }
 
 function isOutOfBounds(x, y) {
-    return (x < 0 || x > boardSize || y < 0 || y > boardSize)
+    return (x < 0 || x >= boardSize || y < 0 || y >= boardSize)
 }
 
 function checkDirectionWin(x, y) {
@@ -274,13 +274,16 @@ function checkDirectionWin(x, y) {
     // checking diagonal right top
     console.log("diagonal right top, x: " + x + " y: " + y);
     for(let i = 1; i < 5; ++i) {
+        if (isOutOfBounds(x+i, y-i)) {
+            break;
+        }
         if (!isTileOccupied(x+i, y-i) || board[x+i][y-i] != currentStoneColor) {
             break;
         }
         stoneConsecCountDiagonal2++
     }
     for(let i = 1; i < 5; ++i) {
-        if (isOutOfBounds(x-i)) {
+        if (isOutOfBounds(x-i, y+i)) {
             break;
         }
         if (!isTileOccupied(x-i, y+i) || board[x-i][y+i] != currentStoneColor) {
