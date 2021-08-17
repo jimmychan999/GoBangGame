@@ -218,8 +218,6 @@ function checkDirectionWin(x, y) {
         }
         stoneConsecCountHori++
     }
-
-    console.log(stoneConsecCountHori + "h");
     if (stoneConsecCountHori >= 5) {
         return true;
     }
