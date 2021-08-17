@@ -13,6 +13,7 @@
     --color-btn: rgb(80, 140, 245);
     --color-btn-disabled: rgba(154, 169, 218, 0.493);
     --color-btn-text: rgb(255, 255, 255);
+    --color-btn-hover: rgb(130, 170, 250);
     --color-btn-text-disabled: rgba(255, 255, 255, 0.6);
     
     --color-board: rgb(250, 200, 140);

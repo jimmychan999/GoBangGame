@@ -12,9 +12,10 @@
     --color-btn: rgb(80, 140, 245);
     --color-btn-disabled: rgba(80, 140, 245, 0.3);
     --color-btn-text: rgb(255, 255, 255);
+    --color-btn-hover: rgb(130, 170, 250);
     --color-btn-text-disabled: rgba(255, 255, 255, 0.7);
 
-    --color-board: rgb(250, 200, 140);
-    --color-board-line: rgb(165, 132, 113);
+    --color-board: rgb(173, 111, 59);
+    --color-board-line: rgb(136, 82, 51);
     --color-stone-hover: rgba(190, 100, 100, 0.3);
 }

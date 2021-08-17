@@ -28,6 +28,10 @@ button {
     font-weight: bold;
 }
 
+button:hover {
+    background-color: var(--color-btn-hover);
+}
+
 button:disabled {
     background-color: var(--color-btn-disabled);
     color: var(--color-btn-text-disabled);
