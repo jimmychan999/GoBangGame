@@ -3,15 +3,18 @@
     --nav-bar-height: 64px;
     --nav-bar-padding-hor: 64px;
     --nav-menu-items-height: 24px;
+    --main-logo-width: 128px;
     
     --body-padding-hor: 64px;
 
+    --footer-padding-hor: 120px;
+    --footer-padding-bottom: 48px;
 }
 
 /* General */
 html, body {
     background-color: var(--color-bg);
-    font-family: 'Courier New', Courier, monospace;
+    font-family: var(--font), 'Consolas', 'Courier New', Courier, monospace;
     color: var(--color-text);
     margin: 0;
     padding: 0;
@@ -65,12 +68,24 @@ a {
 }
 
 #main-logo {
-    display: inline-flex;
-    font-size: 14px;
+    /* display: flex; */
+    /* font-size: 14px; */
+    cursor: pointer;
     margin: 0px;
-    width: var(--nav-bar-height);
+    width: var(--main-logo-width);
     height: var(--nav-bar-height);
     top: 0px;
+}
+
+#logo-text {
+    height: 100%;
+    width: 100%;
+    color: var(--color-logo-text);
+    font-size: 24px;
+    font-weight: bolder;
+    font-family: var(--font);
+    vertical-align: middle;
+    line-height: var(--nav-bar-height);
 }
 
 #nav-menu {
@@ -170,8 +185,8 @@ a {
 
 #game-board {
     background-color: var(--color-board);
-    width: 680px;
-    height: 680px;
+    /* width: 680px; */
+    /* height: 680px; */
     margin: auto;
     position: relative;
     border-radius: 12px;
@@ -195,7 +210,7 @@ a {
     background-color: var(--color-board-line);
 }
 
-.tile-divs {
+.tile-div {
     height: 30px;
     width: 30px;
     position: absolute;
@@ -205,13 +220,15 @@ a {
 
 /* Footer */
 
-#footer {
+#footer-container {
     margin: 0;
     /* height: 100%; */
-    padding-left: var(--nav-bar-padding-hor);
-    padding-right: var(--nav-bar-padding-hor);
+    padding-left: var(--footer-padding-hor);
+    padding-right: var(--footer-padding-hor);
+    padding-bottom: var(--footer-padding-bottom);
     color: var(--color-footer-text);
 }
+
 
 #footer-line {
     background-color: var(--color-footer-line);
@@ -222,6 +239,10 @@ a {
     margin-left: auto;
     margin-right: auto;
     display: block;
+}
+
+#footer {
+    
 }
 
 @keyframes pulse {
