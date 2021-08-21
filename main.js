@@ -265,7 +265,7 @@ function isWon(x, y) {
 }
 
 function isOutOfBounds(x, y) {
-    return (x < 0 || x >= boardSize || y < 0 || y >= boardSize)
+    return (x < 0 || x >= boardNumRows || y < 0 || y >= boardNumRows)
 }
 
 function checkDirectionWin(x, y) {
