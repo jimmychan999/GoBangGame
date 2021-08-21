@@ -1,9 +1,12 @@
 :root {
+    --font: "Roboto Mono";
     --color-bg: rgb(48, 48, 48);
     --color-text: rgb(209, 209, 209);
+
     --color-bg-nav-bar: rgb(77, 77, 77);
-    --color-bg-nav-menu-items-hover: rgb(148, 148, 255);
+    --color-bg-nav-menu-items-hover: rgb(200, 200, 250);
     --color-text-nav-menu-items-hover: rgb(49, 49, 49);
+    --color-logo-text: rgb(157, 180, 240);
     
     --color-footer-text: rgb(140, 140, 140);
     --color-footer-bg: rgb(60, 60, 60);
@@ -15,7 +18,7 @@
     --color-btn-hover: rgb(130, 170, 250);
     --color-btn-text-disabled: rgba(255, 255, 255, 0.7);
 
-    --color-board: rgb(173, 111, 59);
-    --color-board-line: rgb(136, 82, 51);
+    --color-board: rgb(199, 136, 84);
+    --color-board-line: rgb(129, 87, 63);
     --color-stone-hover: rgba(190, 100, 100, 0.3);
 }
