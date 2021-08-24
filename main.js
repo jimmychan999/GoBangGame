@@ -18,6 +18,7 @@ const BACKGROUND_IMAGE_STONE = "inset -5px -3px 8px rgba(0, 0, 0, 0.3)";
 
 
 // Elements
+const gameBody = document.getElementById("game-body");
 const buttonStartGame = document.getElementById("btn-start-game");
 const buttonEndGame = document.getElementById("btn-end-game");
 const gameBoard = document.getElementById("game-board");
@@ -26,57 +27,71 @@ const gameBoard = document.getElementById("game-board");
 // Starting parameters
 let curTheme = THEME_LIGHT;
 let isWhoseTurn = BLACK;
-let boardSize = 19;
-let boardEdgeWidth = 10;
-let stoneDiameter = 30;
-let stoneSep = 5;
+
+let boardNumRows = 15;
+let boardLength = 540;    // The length of the sides of the outermost gridline
+let boardEdgeLength = 30; // Distance from outermost line to edge of board
+let stoneDiameter = 32;
+
+let boardBorderRadius = 15;
+// let stoneSep = 5;  // TODO: remove
 
 // Other global variables
 let board = [];     // 2D array that represent current state of the board
 let tileDivs = [];  // 1D array of document elements
+let verLines = [];
+let horLines = [];
 
 function genBoardLines() {
-    let padding = `${boardEdgeWidth + Math.round(stoneDiameter / 2)}px`;
+    let padding = `${boardEdgeLength}px`;
     function genVerLine() {
         let line = document.createElement("div");
         line.setAttribute("class", "board-line-ver");
-        line.style.top = padding;
-        line.style.bottom = padding;
         return line;
     }
 
     function genHorLine() {
         let line = document.createElement("div");
         line.setAttribute("class", "board-line-hor");
-        line.style.left = padding;
-        line.style.right = padding;
         return line;
     }
 
     let boardLinesContainer = document.getElementById("board-lines-container");
     // Generate grid lines on board
-    for (let i = 0; i < boardSize; ++i) {
-        let offset = `${boardEdgeWidth + i * (stoneDiameter + stoneSep) + Math.round(stoneDiameter / 2)}px`;
+    for (let i = 0; i < boardNumRows; ++i) {
         let verLine = genVerLine();
         let horLine = genHorLine();
-        verLine.style.left = offset;
-        horLine.style.top = offset;
+        verLines.push(verLine);
+        horLines.push(horLine);
         gameBoard.appendChild(horLine);
         gameBoard.appendChild(verLine);
     }
 }
 
+function updateBoardSize() {
+    /**
+     * Resize board according to boardLength and boardEdgeLength
+     */
+    let height = 2 * boardEdgeLength + boardLength;
+    let width = height;
+    gameBoard.style.height = `${height}px`;
+    gameBoard.style.width = `${width}px`;
+    gameBoard.style.borderRadius = `${boardBorderRadius}px`;
+}
+
 function initBoard() {
+    console.log("Initting board");
     genBoardLines();
     genTileDivs();
     initBoardArray();
+    resizeBoard();
 }
 
 function initBoardArray() {
     // assume board = []
-    for (let i = 0; i < boardSize; ++i) {
+    for (let i = 0; i < boardNumRows; ++i) {
         let row = [];
-        for (let j = 0; j < boardSize; ++j) {
+        for (let j = 0; j < boardNumRows; ++j) {
             row.push(EMPTY);
         }
         board.push(row);
@@ -84,8 +99,8 @@ function initBoardArray() {
 }
 
 function setBoardArrayEmpty() {
-    for (let i = 0; i < boardSize; ++i) {
-        for (let j = 0; j < boardSize; ++j) {
+    for (let i = 0; i < boardNumRows; ++i) {
+        for (let j = 0; j < boardNumRows; ++j) {
             board[i][j] = EMPTY;
         }
     }
@@ -93,12 +108,12 @@ function setBoardArrayEmpty() {
 
 function genTileDivs() {
     // Store tile divs in an array for faster access later
-    for (let i = 0; i < boardSize; i++) {
-        for (let j = 0; j < boardSize; j++) {
+    for (let i = 0; i < boardNumRows; i++) {
+        for (let j = 0; j < boardNumRows; j++) {
             tileDiv = document.createElement("div");
-            tileDiv.setAttribute("class", "tile-divs");
-            tileDiv.style.left = `${boardEdgeWidth + j * (stoneDiameter + stoneSep)}px`;
-            tileDiv.style.top = `${boardEdgeWidth + i * (stoneDiameter + stoneSep)}px`;
+            tileDiv.setAttribute("class", "tile-div");
+            // tileDiv.style.left = `${boardEdgeLength + j * (stoneDiameter + stoneSep)}px`;
+            // tileDiv.style.top = `${boardEdgeLength + i * (stoneDiameter + stoneSep)}px`;
             tileDiv.setAttribute("id", "tile: " + i.toString() + "," + j.toString());
             tileDiv.setAttribute("onclick", `onClickDivAt(${i}, ${j})`);
 
@@ -120,7 +135,7 @@ function genTileDivs() {
             tileDiv.addEventListener('mouseenter', onMouseEnter);
             tileDiv.addEventListener('mouseleave', onMouseLeave);
 
-            tileDivs.push(tileDiv);  // The index of this element is (i * boardSize + j)
+            tileDivs.push(tileDiv);  // The index of this element is (i * boardNumRows + j)
         }
     }
     
@@ -128,6 +143,68 @@ function genTileDivs() {
     for (tileDiv of tileDivs) {
         gameBoard.appendChild(tileDiv);
     }
+}
+
+function resizeTileDivs() {
+    for (let i = 0; i < boardNumRows; i++) {
+        for (let j = 0; j < boardNumRows; j++) {
+            let tileDiv = getTileDiv(i, j);
+            // Distance between neighboring lines
+            let rowGap = boardLength / (boardNumRows - 1);
+            let y = boardEdgeLength + i * rowGap - stoneDiameter / 2; // horizontal
+            let x = boardEdgeLength + j * rowGap - stoneDiameter / 2; // vertical
+            tileDiv.style.left = y.toString() + "px";
+            tileDiv.style.top = x.toString() + "px";
+            tileDiv.style.width = stoneDiameter.toString() + "px";
+            tileDiv.style.height = stoneDiameter.toString() + "px";
+        }
+    }
+}
+
+function resizeBoardLines() {
+    let padding = `${boardEdgeLength}px`;
+    for (let i = 0; i < boardNumRows; i++) {
+        // Distance between neighboring lines
+        let rowGap = boardLength / (boardNumRows - 1);
+        
+        let offset = boardEdgeLength + i * rowGap;
+        let offsetStr = `${offset}px`; 
+
+        // Set style
+        let verLine = verLines[i];
+        verLine.style.top = padding;
+        verLine.style.bottom = padding;
+        verLine.style.left = offsetStr;
+        
+        let horLine = horLines[i];
+        horLine.style.top = offsetStr;
+        horLine.style.left = padding;
+        horLine.style.right = padding;
+    }
+}
+
+function updateBoardSizeParams() {
+    /**
+     * Set parameters that control the appearance of the game board.
+     * Specifically, set update the following variables:
+     * 
+     *   boardLength, boardEdgeLength, stoneDiameter, boardBorderRadius
+     * 
+     */
+    let gameBodyWidth = gameBody.clientWidth * 0.9;
+    let gameBodyHeight = document.body.clientHeight * 0.7;
+    boardLength = Math.min(gameBodyHeight, gameBodyWidth);
+    boardEdgeLength = boardLength * 0.06;
+    let lineGap = boardLength / (boardNumRows - 1);
+    stoneDiameter = lineGap * 0.84;
+    boardBorderRadius = stoneDiameter / 2;
+}
+
+function resizeBoard() {
+    updateBoardSizeParams();
+    updateBoardSize();
+    resizeTileDivs();
+    resizeBoardLines();
 }
 
 function isTileOccupied(x, y) {
@@ -167,7 +244,7 @@ function nextTurn() {
 
 function getTileDiv(x, y) {
     // Return tile div at position (x, y)
-    return tileDivs[x * boardSize + y];
+    return tileDivs[x * boardNumRows + y];
 }
 
 function isWon(x, y) {
@@ -188,7 +265,7 @@ function isWon(x, y) {
 }
 
 function isOutOfBounds(x, y) {
-    return (x < 0 || x >= boardSize || y < 0 || y >= boardSize)
+    return (x < 0 || x >= boardNumRows || y < 0 || y >= boardNumRows)
 }
 
 function checkDirectionWin(x, y) {
@@ -304,14 +381,29 @@ function hideBoardStones() {
     }
 }
 
+function initTheme() {
+    let storedTheme = localStorage.getItem("theme");
+    // alert(storedTheme);
+    if (storedTheme == null) {
+        curTheme = THEME_LIGHT;
+    } else {
+        curTheme = storedTheme;
+    }
+    setTheme(curTheme);
+}
+
+function setTheme(theme) {
+    localStorage.setItem("theme", theme);
+    document.getElementById("theme-switcher").href = "../css/themes/" + theme + ".css";
+}
+
 function changeTheme() {
     if (curTheme == THEME_LIGHT) {
         curTheme = THEME_DARK;
     } else {
         curTheme = THEME_LIGHT;
     }
-
-    document.getElementById("theme-switcher").href = "./themes/" + curTheme + ".css";
+    setTheme(curTheme);
 }
 
 
@@ -340,11 +432,19 @@ function goToMainMenu() {
     window.location.href = "index.html";
 }
 
-function onLoad() {
-    initBoard();
+function onResize() {
+    resizeBoard();
 }
 
+function onLoad() {
+    initTheme();
+    initBoard();
+    window.onresize = onResize;
+}
 
+function onloadHelp() {
+    initTheme();
+}
 
 // add clicking sound effects
 
