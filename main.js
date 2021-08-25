@@ -414,6 +414,7 @@ function clearBoard() {
 }
 
 function startGame() {
+    animationRemoveGameOverText();
     clearBoard();
     buttonStartGame.disabled = true;
     buttonEndGame.disabled = false;

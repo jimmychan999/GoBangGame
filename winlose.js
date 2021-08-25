@@ -1,17 +1,21 @@
 function animationShowGamOverText(text) {
-  // if any game over popup is showing, remove it
-  document.querySelectorAll(".popupGameOver").forEach(e => e.remove());
+  animationRemoveGameOverText();
 
-  const a = document.createElement("div");
+  const gameBoard = document.querySelector("#game-board");
   
-  a.className = "popupGameOver";
-  //a.innerHTML = text;
-  document.querySelector("#game-board").appendChild(a);
+  
 
+  const popupGameOverContainer = document.createElement("div");
+  popupGameOverContainer.className = "popupGameOverContainer";
+  gameBoard.appendChild(popupGameOverContainer);
+
+  const popupGameOver = document.createElement("div");
+  popupGameOver.className = "popupGameOver";
+  popupGameOverContainer.appendChild(popupGameOver);
   
   const popupGameOverTextContainer = document.createElement("div");
   popupGameOverTextContainer.className = "popupGameOverTextContainer";
-  a.appendChild(popupGameOverTextContainer);
+  popupGameOver.appendChild(popupGameOverTextContainer);
   
   const popupGameOverText = document.createElement("div");
   popupGameOverText.className = "popupGameOverText";
@@ -20,6 +24,11 @@ function animationShowGamOverText(text) {
   
   const popupBarContainer = document.createElement("div");
   popupBarContainer.className = "popupBarContainer";
-  a.appendChild(popupBarContainer);
+  popupGameOver.appendChild(popupBarContainer);
 
+}
+
+function animationRemoveGameOverText() {
+  // if any game over popup is showing, remove it
+  document.querySelectorAll(".popupGameOverContainer").forEach(e => e.remove());
 }
