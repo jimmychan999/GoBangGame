@@ -1,13 +1,13 @@
 /* variables */
 :root {
     --nav-bar-height: 64px;
-    --nav-bar-padding-hor: 64px;
+    --nav-bar-padding-hor: min(5vw, 64px);
     --nav-menu-items-height: 24px;
     --main-logo-width: 128px;
     
-    --body-padding-hor: 64px;
+    --body-padding-hor: min(5vw, 64px);
 
-    --footer-padding-hor: 120px;
+    --footer-padding-hor: min(8vw, 120px);
     --footer-padding-bottom: 48px;
 }
 
@@ -25,8 +25,8 @@ button {
     background-color: var(--color-btn);
     border-width: 0;
     border-radius: 12px;
-    padding: 8px;
-    margin: 8px;
+    padding: 8px 10px;
+    margin: 4px;
     color: var(--color-btn-text);
     font-weight: bold;
 }
@@ -153,29 +153,28 @@ a {
 #top-panel {
     display: flex;
     position: relative;
-    padding: 12px;
-    padding-left: 72px;
-    padding-right: 72px;
+    
+    max-width: 80vh;
+    margin: auto;
+    padding: 12px 4px;
     height: 64px;
     align-items: center;
     justify-content: center;
 }
 
 #top-panel-left {
-    float: left;
-    flex: 0 0 30%;
+    flex: 1;
 }
 
 #top-panel-center {
-    flex: 0 0 40%;
+    flex: 1.6;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 #top-panel-right {
-    float: right;
-    flex: 0 0 30%;
+    flex: 1;
 }
 
 #timer {
@@ -284,8 +283,7 @@ a {
 .popupGameOverTextContainer {
     user-select: none;
     width: 100%;
-    height: min(7vw,70px);
-    font-size: min(6vw, 53px);
+    height: min(7vw,7vh);
     overflow: hidden;
     user-select: none;
 }
@@ -298,7 +296,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: min(6vw, 53px);
+    font-size: min(7vw, 6vh);
     color: white;
     
     animation: popupShowText 1.5s;
@@ -316,7 +314,7 @@ a {
     min-height: 2px;
     height: min(1vw,7px);
     background-color: var(--color-btn);;   
-    width: 100%;
+    width: calc(100% - 20px);
     
     border-radius: 100px;
     
