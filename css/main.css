@@ -184,6 +184,7 @@ a {
 }
 
 #game-board {
+    display: flex;
     background-color: var(--color-board);
     /* width: 680px; */
     /* height: 680px; */
@@ -248,5 +249,74 @@ a {
 @keyframes pulse {
 	0% {transform: scale(1);}
 	50% {transform: scale(1.05);}
+	100% {transform: scale(1);}
+}
+
+
+.popupGameOver {
+    position: relative;
+    z-index: 5;
+    margin: auto;
+    min-width: 40px;
+    user-select: none;
+    width: 50%;
+    animation: popupShow 1s;
+    animation-iteration-count: 1;
+    animation-timing-function: cubic-bezier(0, 0, 0, 1);
+}
+
+.popupGameOverTextContainer {
+    width: 100%;
+    height: min(12vw,120px);
+    font-size: min(6vw, 53px);
+    overflow: hidden;
+    text-shadow: 3px 2px 12px black;
+}
+
+.popupGameOverText {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: min(6vw, 53px);
+    
+    animation: popupShowText 1.5s;
+    animation-iteration-count: 1;
+    animation-timing-function: cubic-bezier(0, 0, 0, 1);
+    text-shadow: 3px 2px 12px black;
+}
+
+.popupBarContainer {
+    position: relative;
+    z-index: 5;
+    margin: auto;
+    min-width: 40px;
+    min-height: 4px;
+    height: min(1vw,7px);
+    user-select: none;
+    background-color: var(--color-btn);;   
+    width: 100%;
+    
+    animation: popupShowBar .6s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.34);
+}
+
+@keyframes popupShow {
+	0% {opacity: 0;}
+	100% {opacity: 1;}
+}
+
+@keyframes popupShowText {
+	0% {transform: translateY(100%);}
+	10% {transform: translateY(100%);}
+	100% {transform: translateY(0%);}
+}
+
+@keyframes popupShowBar {
+	0% {transform: scalex(0);}
 	100% {transform: scale(1);}
 }

@@ -22,6 +22,8 @@ const gameBody = document.getElementById("game-body");
 const buttonStartGame = document.getElementById("btn-start-game");
 const buttonEndGame = document.getElementById("btn-end-game");
 const gameBoard = document.getElementById("game-board");
+const tileContainer = document.getElementById("game-board-tiles");
+const gridContainer = document.getElementById("game-board-grids");
 
 
 // Starting parameters
@@ -56,15 +58,14 @@ function genBoardLines() {
         return line;
     }
 
-    let boardLinesContainer = document.getElementById("board-lines-container");
     // Generate grid lines on board
     for (let i = 0; i < boardNumRows; ++i) {
         let verLine = genVerLine();
         let horLine = genHorLine();
         verLines.push(verLine);
         horLines.push(horLine);
-        gameBoard.appendChild(horLine);
-        gameBoard.appendChild(verLine);
+        gridContainer.appendChild(horLine);
+        gridContainer.appendChild(verLine);
     }
 }
 
@@ -141,7 +142,7 @@ function genTileDivs() {
     
     // Set each tile div as children of "game-board" div.
     for (tileDiv of tileDivs) {
-        gameBoard.appendChild(tileDiv);
+        tileContainer.appendChild(tileDiv);
     }
 }
 
@@ -425,6 +426,8 @@ function endGame() {
     gameBoard.className = '';
     buttonStartGame.disabled = false;
     buttonEndGame.disabled = true;
+
+    animationShowGamOverText("Game Over");
 }
 
 function goToMainMenu() {
