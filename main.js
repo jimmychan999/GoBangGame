@@ -255,13 +255,22 @@ function isWon(x, y) {
     if (checkDirectionWin(x, y)) {
         if (board[x][y] == BLACK) {
             setTimeout(function() {
-                alert("BLACK won")
-            }, 10)
+                console.log("BLACK won")
+                animationShowGamOverText("BLACK WON");
+                setTimeout(function() {
+                    document.querySelector(".popupBarContainer").style.backgroundColor = "#000000aa";
+                }, 2)
+            }, 20)
         } else {
             setTimeout(function() {
-                alert("WHITE won")
-            }, 10)
+                console.log("WHITE won")
+                animationShowGamOverText("WHTIE WON");
+                setTimeout(function() {
+                    document.querySelector(".popupBarContainer").style.backgroundColor = "#ffffffaa";
+                }, 2)
+            }, 20)
         }
+        endGame();
     }
 }
 
@@ -413,8 +422,12 @@ function clearBoard() {
     hideBoardStones();
 }
 
-function startGame() {
+function startGameBtnClick() {
     animationRemoveGameOverText();
+    startGame();
+}
+
+function startGame() {
     clearBoard();
     buttonStartGame.disabled = true;
     buttonEndGame.disabled = false;
@@ -423,12 +436,15 @@ function startGame() {
     gameBoard.className = 'start';
 }
 
+function endGameBtnClick() {
+    animationShowGamOverText("Game Over");
+    endGame();
+}
+
 function endGame() {
     gameBoard.className = '';
     buttonStartGame.disabled = false;
     buttonEndGame.disabled = true;
-
-    animationShowGamOverText("Game Over");
 }
 
 function goToMainMenu() {
