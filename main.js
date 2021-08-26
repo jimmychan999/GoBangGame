@@ -264,7 +264,7 @@ function isWon(x, y) {
         } else {
             setTimeout(function() {
                 console.log("WHITE won")
-                animationShowGamOverText("WHTIE WON");
+                animationShowGamOverText("WHITE WON");
                 setTimeout(function() {
                     document.querySelector(".popupBarContainer").style.backgroundColor = "#ffffffaa";
                 }, 2)
