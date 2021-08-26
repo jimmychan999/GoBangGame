@@ -8,7 +8,7 @@
     --color-bg-nav-menu-items-hover: rgb(76, 76, 206);
     --color-text-nav-menu-items-hover: rgb(255, 255, 255);
     /* --color-text-nav-menu-items: rgb(255, 255, 255); */
-    --color-logo-text: rgb(61, 98, 192);
+    --color-logo-text: rgb(80, 140, 245);
     /* --color-logo-text: white; */
 
     --color-footer-text: rgb(140, 140, 140);
@@ -25,6 +25,7 @@
     --color-board-line: rgb(165, 132, 113);
     --color-stone-hover: rgba(190, 100, 100, 0.3);
 
-    --border-width-nav-bar: 0;
-    --border-width-button: 0;
+    --border-width-nav-bar: 0px;
+    --border-width-button: 0px;
+    --border-width-timer: 0px;
 }

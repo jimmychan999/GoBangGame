@@ -1,6 +1,6 @@
 /* variables */
 :root {
-    --button-padding: 8px 10px;
+    --button-padding: calc(8px - var(--border-width-button)) calc(10px - var(--border-width-button));
     --button-margin: 4px;
     --button-border-radius: 12px;
 
@@ -12,6 +12,8 @@
     --body-padding-hor: min(5vw, 64px);
     --top-panel-height: 50px;
     --timer-height: 40px;
+    --timer-border-radius: 24px;
+    --timer-padding: calc(4px - var(--border-width-timer)) calc(12px - var(--border-width-timer));
 
     --footer-padding-hor: min(8vw, 120px);
     --footer-padding-bottom: 48px;
@@ -77,6 +79,9 @@ a {
     border-width: var(--border-width-nav-bar);
     border-color: var(--border-color-nav-bar);
     border-bottom-style: solid;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box; /* Firefox, other Gecko */
+    box-sizing: border-box; /* Opera/IE 8+ */
 }
 
 #main-logo {
@@ -189,18 +194,23 @@ a {
 
 #top-panel-right {
     display: flex;
+    justify-content: flex-end;
     flex: 1;
     margin-right: 0;
 }
 
 .timer {
     display: flex;
+    gap: 8px;
     vertical-align: middle;
     height: var(--timer-height);
     background-color: var(--color-bg-nav-bar);
-    padding: 4px;
-    border-radius: 12px;
+    padding: var(--timer-padding);
+    border-radius: var(--timer-border-radius);
     box-shadow: 0px 4px 6px -4px #0000009e;
+    border-style: solid;
+    border-color: var(--border-color-timer);
+    border-width: var(--border-width-timer);
 }
 
 .timer-text {
@@ -221,18 +231,13 @@ a {
     vertical-align: middle;
 }
 
-#left-timer {
-    display: flex;
+/* #left-timer {
     padding-left: 12px;
 }
 
 #right-timer {
-    display: flex;
-    float: right;
-    margin-right: 0;
-    margin-left: auto;
     padding-right: 12px;
-}
+}  */
 
 .timer-stone-container {
     display: flex;
@@ -242,7 +247,7 @@ a {
 .timer-stone {
     height: 30px;
     width: 30px;
-    margin: 6px;
+    /* margin: 6px; */
     /* position: absolute; */
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0);
