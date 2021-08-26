@@ -1,9 +1,6 @@
 function animationShowGamOverText(text) {
-  animationRemoveGameOverText();
-
   const gameBoard = document.querySelector("#game-board");
-  
-  
+  animationRemoveGameOverText();
 
   const popupGameOverContainer = document.createElement("div");
   popupGameOverContainer.className = "popupGameOverContainer";
@@ -25,6 +22,13 @@ function animationShowGamOverText(text) {
   const popupBarContainer = document.createElement("div");
   popupBarContainer.className = "popupBarContainer";
   popupGameOver.appendChild(popupBarContainer);
+
+  
+  // Add play again button
+  const popupExtras = document.createElement("div");
+  popupExtras.className = "popupExtras";
+  popupExtras.innerHTML = '<div class="popupExtrasContent"><button onclick="startGameBtnClick()">Play Again</button></div>';
+  popupGameOverContainer.appendChild(popupExtras);
 
 }
 
