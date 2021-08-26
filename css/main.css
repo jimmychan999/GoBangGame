@@ -1,11 +1,16 @@
 /* variables */
 :root {
+    --button-padding: 8px 10px;
+    --button-margin: 4px;
+    --button-border-radius: 12px;
+
     --nav-bar-height: 64px;
     --nav-bar-padding-hor: min(5vw, 120px);
     --nav-menu-items-height: 24px;
     --main-logo-width: 128px;
     
     --body-padding-hor: min(5vw, 64px);
+    --top-panel-height: (5vw, 64px);
 
     --footer-padding-hor: min(8vw, 120px);
     --footer-padding-bottom: 48px;
@@ -23,10 +28,12 @@ html, body {
 
 button {
     background-color: var(--color-btn);
-    border-width: 0;
-    border-radius: 12px;
-    padding: 8px 10px;
-    margin: 4px;
+    border-style: solid;
+    border-color: var(--border-color-button);
+    border-width: var(--border-width-button);
+    border-radius: var(--button-border-radius);
+    padding: var(--button-padding);
+    margin: var(--button-margin);
     color: var(--color-btn-text);
     font-weight: bold;
     cursor: pointer;
@@ -66,6 +73,9 @@ a {
     padding-left: var(--nav-bar-padding-hor);
     padding-right: var(--nav-bar-padding-hor);
     vertical-align: middle;
+    border-width: var(--border-width-nav-bar);
+    border-color: var(--border-color-nav-bar);
+    border-bottom-style: solid;
 }
 
 #main-logo {
@@ -158,7 +168,7 @@ a {
     max-width: 80vh;
     margin: auto;
     padding: 12px 4px;
-    height: 64px;
+    height: var(--top-panel-height);
     align-items: center;
     justify-content: center;
 }
@@ -186,8 +196,6 @@ a {
 #game-board {
     display: flex;
     background-color: var(--color-board);
-    /* width: 680px; */
-    /* height: 680px; */
     margin: auto;
     position: relative;
     border-radius: 12px;
@@ -242,14 +250,10 @@ a {
     display: block;
 }
 
-#footer {
-    
-}
-
 @keyframes pulse {
-	0% {transform: scale(1);}
-	50% {transform: scale(1.05);}
-	100% {transform: scale(1);}
+    0% {transform: scale(1);}
+    50% {transform: scale(1.05);}
+    100% {transform: scale(1);}
 }
 
 .popupGameOverContainer {
@@ -327,25 +331,25 @@ a {
 }
 
 @keyframes popupShow {
-	0% {opacity: 0;}
-	100% {opacity: 1;}
+    0% {opacity: 0;}
+    100% {opacity: 1;}
 }
 
 @keyframes popupShowText {
-	0% {transform: translateY(100%);}
-	20% {transform: translateY(100%);}
-	100% {transform: translateY(0%);}
+    0% {transform: translateY(100%);}
+    20% {transform: translateY(100%);}
+    100% {transform: translateY(0%);}
 }
 
 @keyframes popupShowBar {
-	0% {transform: scalex(0);}
-	100% {transform: scale(1);}
+    0% {transform: scalex(0);}
+    100% {transform: scale(1);}
 }
 
 
 @keyframes popupHide {
-	0% {transform: scalex(0);}
-	100% {transform: scale(1);}
+    0% {transform: scalex(0);}
+    100% {transform: scale(1);}
 }
 
 
@@ -381,12 +385,12 @@ a {
 
 
 @keyframes popupExtrasShow {
-	0% {height: 0%;}
-	100% {height: 100px;}
+    0% {height: 0%;}
+    100% {height: 100px;}
 }
 
 @keyframes popupExtrasContentShow {
-	0% {margin-top: -40px; opacity: 0;}
-	20% {margin-top: -40px; opacity: 0;}
-	100% {margin-top: 15px; opacity: 1;}
+    0% {margin-top: -40px; opacity: 0;}
+    20% {margin-top: -40px; opacity: 0;}
+    100% {margin-top: 15px; opacity: 1;}
 }
