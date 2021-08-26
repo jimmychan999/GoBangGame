@@ -25,6 +25,9 @@
                     <a href="./help.html">Help</a>
                 </div>
                 <div class="nav-menu-items">
+                    <a href="./settings.html">Settings</a>
+                </div>
+                <div class="nav-menu-items">
                     <a href="./about.html">About</a>
                 </div>
             </div>
@@ -39,14 +42,16 @@
             <div id="game-body">
                 <div id="top-panel">
                     <div id="top-panel-left" class="top-panel-item">
-                        <button id="btn-change-theme" onclick="changeTheme()">Change theme</button>
+                        <div id="left-timer">
+                            <p>00:00</p> 
+                        </div>
                     </div>
                     <div id="top-panel-center" class="top-panel-item">
                         <button id="btn-start-game" onclick="startGameBtnClick()">Start game</button>
                         <button id="btn-end-game" disabled onclick="endGameBtnClick()">End game</button>
                     </div>
                     <div id="top-panel-right" class="top-panel-item">
-                        <div id="timer">
+                        <div id="right-timer">
                             <p>00:00</p> 
                         </div>
                     </div>
@@ -78,6 +83,7 @@
         
     <!-- scripts -->
     <script type="text/javascript" src="../main.js"></script>
+    <script type="text/javascript" src="../themeManager.js"></script>
     <script type="text/javascript" src="../winLose.js"></script>
 </body>
 </html>

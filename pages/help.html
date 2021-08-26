@@ -24,40 +24,40 @@
                     <a href="./help.html">Help</a>
                 </div>
                 <div class="nav-menu-items">
+                    <a href="./settings.html">Settings</a>
+                </div>
+                <div class="nav-menu-items">
                     <a href="./about.html">About</a>
                 </div>
             </div>
         </div>
         
         <div id="body">
-            <h1>Introduction</h1>
+            <h1>1 Introduction</h1>
             <p>
                 Gomoku, also called Five in a Row (Chinese: "五子棋"，"五目", 
                 etc.), is an abstract strategy board game. It is traditionally 
                 played by two players with Go pieces (black and white stones) 
                 on a Go board. 
-                
                 <br><br>
                 It is played using a 15×15 board, while in the past a 19×19 
                 board was standard. The game is known in several countries 
                 under different names.
-            </p>
-            <h1>Rules</h1>
-            <p>
+                <br><br>
                 Players alternate turns placing a stone of their color on an 
                 empty intersection. Black plays first. The winner is the first 
                 player to form an unbroken chain of five stones horizontally, 
                 vertically, or diagonally. 
             </p>
-            <h2>First Player Advantage</h2>
+            <h1>2 First Player Advantage</h1>
             <p>
                 It has been proven that the first player can force a win, to 
                 mitigate this imbalance, professional games have adopted extra 
                 rules. Since 2009, championships have adopted the "swap2"
                 opening rule. 
             </p>
-            <h2>Opening Rules</h2>
-            <h3>Pro</h3>
+            <h1>3 Opening Rules</h1>
+            <h2>3.1 Pro</h2>
             <p>
                 The Pro opening rule has been previously adopted in
                 championships, but was dropped after being deemed too 
@@ -69,10 +69,10 @@
                 placed at least three intersections away from the first stone 
                 (two empty intersections in between the two stones).
             </p>
-            <h3>Swap2</h3>
+            <h2>3.2 Swap2</h2>
             <p>
-                The tentative first player places three stones on the board,
-                two black and one white. The tentative second player then has
+                The first player places three stones on the board,
+                two black and one white. The second player then has
                 three options:
             </p>
             <ol>
@@ -81,23 +81,43 @@
                     stone</li>
                 <li>Or they can place two more stones, one black and one white,
                     and pass the choice of which color to play back to the 
-                    tentative first player.</li>
+                    first player.</li>
             </ol>
             <p>
-                Because the tentative first player doesn't know where the
-                tentative second player will place the additional stones if
+                Because the first player doesn't know where the
+                second player will place the additional stones if
                 they take option 2 or 3, the swap2 opening protocol limits
                 excessive studying of a line by only one of the players.
             </p>
-            <h2>Variants</h2>
-            <p>Upcoming...</p>
+            <h1>4 Variants</h1>
+            <h2>4.1 Freestyle</h2>
 
-            <h2>Overlines</h2>
+            <h2>4.2 Renju</h2>
             <p>
-                Placing so that a line of more than five stones of the same 
-                color is created does not result in a win. These are called 
-                overlines.
+                It is played on a 15×15 board, with the rules of three and three, 
+                four and four, and overlines applied to Black only.
+
+                Renju also makes use of various tournament opening rules, such
+                as Soosõrv-8, the current international standard for this
+                variant.
             </p>
+
+            <h1>5 Rules</h1>
+            <ul>
+                <li>
+                    <strong>Overlines:</strong> prevent a player from winning if they form a line
+                    of 6 or more stones.
+                </li>
+                <li>
+                    <strong>Three and three:</strong> bans a move that simultaneously forms two
+                    open rows of three stones (rows not blocked by an opponent's
+                    stone at either end).
+                </li>
+                <li>
+                    <strong>Four and four:</strong> bans a move that simultaneously forms two
+                    rows of four stones (open or not).
+                </li>
+            </ul>
         </div>
 
 
@@ -116,5 +136,6 @@
         
     <!-- scripts -->
     <script type="text/javascript" src="../main.js"></script>
+    <script type="text/javascript" src="../themeManager.js"></script>
 </body>
 </html>
