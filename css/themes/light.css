@@ -22,4 +22,6 @@
     --color-board-line: rgb(165, 132, 113);
     --color-stone-hover: rgba(190, 100, 100, 0.3);
 
+    --border-width-nav-bar: 0;
+    --border-width-button: 0;
 }
