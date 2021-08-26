@@ -4,9 +4,10 @@
     --color-text: rgb(209, 209, 209);
 
     --color-bg-nav-bar: rgb(77, 77, 77);
-    --color-bg-nav-menu-items-hover: rgb(200, 200, 250);
+    --color-bg-nav-menu-items-hover: rgb(80, 140, 245);
     --color-text-nav-menu-items-hover: rgb(49, 49, 49);
-    --color-logo-text: rgb(157, 180, 240);
+    /* --color-logo-text: rgb(157, 180, 240); */
+    --color-logo-text: rgb(35, 146, 236);
     
     --color-footer-text: rgb(140, 140, 140);
     --color-footer-bg: rgb(60, 60, 60);

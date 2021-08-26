@@ -2,22 +2,17 @@
 const EMPTY = 0;
 const BLACK = 1;
 const WHITE = 2;
-const THEME_LIGHT = "light";
-const THEME_DARK = "dark";
-const THEME_HIGH_CONTRAST = "high-contrast"
-
-// Starting parameters
-let curTheme = THEME_LIGHT;
-let isWhoseTurn = BLACK;
 
 let boardNumRows = 15;
 let boardLength = 540;    // The length of the sides of the outermost gridline
 let boardEdgeLength = 30; // Distance from outermost line to edge of board
 let stoneDiameter = 32;
-
 let boardBorderRadius = 15;
 
 // Other global variables
+let isWhoseTurn = BLACK;
+let blackTime = 0;
+let whiteTime = 0;
 let board = [];     // 2D array that represent current state of the board
 let tileDivs = [];  // 1D array of document elements
 let verLines = [];
@@ -48,6 +43,8 @@ const buttonEndGame = document.getElementById("btn-end-game");
 const gameBoard = document.getElementById("game-board");
 const tileContainer = document.getElementById("game-board-tiles");
 const gridContainer = document.getElementById("game-board-grids");
+const leftTimerStone = document.getElementById("left-timer-stone");
+const rightTimerStone = document.getElementById("right-timer-stone");
 
 
 function genBoardLines() {
@@ -199,9 +196,9 @@ function updateBoardSizeParams() {
     let gameBodyWidth = gameBody.clientWidth * 0.9;
     let gameBodyHeight = document.body.clientHeight * 0.85 - 128;
     boardLength = Math.min(gameBodyHeight, gameBodyWidth);
-    boardEdgeLength = boardLength * 0.06;
     let lineGap = boardLength / (boardNumRows - 1);
     stoneDiameter = lineGap * 0.84;
+    boardEdgeLength = stoneDiameter * 1;
     boardBorderRadius = stoneDiameter / 2;
 }
 
@@ -344,9 +341,21 @@ function checkDirectionWin(x, y) {
     return winningPos
 }
 
-function showBoard() {
-    // Set style of board depending on current pieces on the board
-};
+function initTimerStone() {
+    leftTimerStone.style.backgroundColor = COLOR_STR_BLACK;
+    leftTimerStone.style.boxShadow = BOX_SHADOW_BLACK_STONE;
+    leftTimerStone.backgroundImage = BACKGROUND_IMAGE_STONE;
+    rightTimerStone.style.backgroundColor = COLOR_STR_WHITE;
+    rightTimerStone.style.boxShadow = BOX_SHADOW_WHITE_STONE;
+    rightTimerStone.backgroundImage = BACKGROUND_IMAGE_STONE;
+    
+}
+
+function initTimer() {
+    initTimerStone()
+    whiteTime = 0
+    blackTime = 0
+}
 
 function hideBoardStones() {
     for (let tileDiv of tileDivs) {
@@ -354,33 +363,6 @@ function hideBoardStones() {
         tileDiv.style.boxShadow = "0 0 0 0 rgba(0,0,0,0)";
     }
 }
-
-function initTheme() {
-    let storedTheme = localStorage.getItem("theme");
-    if (storedTheme == null) {
-        curTheme = THEME_LIGHT;
-    } else {
-        curTheme = storedTheme;
-    }
-    setTheme(curTheme);
-}
-
-function setTheme(theme) {
-    localStorage.setItem("theme", theme);
-    document.getElementById("theme-switcher").href = "../css/themes/" + theme + ".css";
-}
-
-function changeTheme() {
-    if (curTheme == THEME_LIGHT) {
-        curTheme = THEME_DARK;
-    } else if (curTheme == THEME_DARK) {
-        curTheme = THEME_HIGH_CONTRAST;
-    } else {
-        curTheme = THEME_LIGHT;
-    }
-    setTheme(curTheme);
-}
-
 
 function clearBoard() {
     setBoardArrayEmpty();
@@ -425,6 +407,7 @@ function onResize() {
 function onLoad() {
     initTheme();
     initBoard();
+    initTimer();
     window.onresize = onResize;
 }
 
