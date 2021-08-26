@@ -191,8 +191,7 @@ function isOutOfBounds(x, y) {
     return (x < 0 || x >= boardSize || y < 0 || y >= boardSize)
 }
 
-function checkDirectionWin(x, y) {
-    
+function checkDirectionWin(x, y) {   
     let currentStoneColor = board[x][y];
     let stoneConsecCountHori = 1;
     let stoneConsecCountVert = 1;
@@ -290,7 +289,6 @@ function checkDirectionWin(x, y) {
     if (stoneConsecCountDiagonal2 >= 5) {
         return true;
     }
-
 }
 
 function showBoard() {
