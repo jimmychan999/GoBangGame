@@ -10,7 +10,8 @@
     --main-logo-width: 128px;
     
     --body-padding-hor: min(5vw, 64px);
-    --top-panel-height: (5vw, 64px);
+    --top-panel-height: 50px;
+    --timer-height: 40px;
 
     --footer-padding-hor: min(8vw, 120px);
     --footer-padding-bottom: 48px;
@@ -175,6 +176,7 @@ a {
 }
 
 #top-panel-left {
+    display: flex;
     flex: 1;
 }
 
@@ -186,18 +188,74 @@ a {
 }
 
 #top-panel-right {
+    display: flex;
     flex: 1;
+    margin-right: 0;
+}
+
+.timer {
+    display: flex;
+    vertical-align: middle;
+    height: var(--timer-height);
+    background-color: var(--color-bg-nav-bar);
+    padding: 4px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 6px -4px #0000009e;
+}
+
+.timer-text {
+    display: flex;
+    position: relative;
+    height: var(--timer-height);
+    vertical-align: middle;
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding: 0px;
+}
+
+.timer-text p {
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    line-height: var(--timer-height);
+    vertical-align: middle;
+}
+
+#left-timer {
+    display: flex;
+    padding-left: 12px;
 }
 
 #right-timer {
+    display: flex;
+    float: right;
+    margin-right: 0;
     margin-left: auto;
+    padding-right: 12px;
+}
+
+.timer-stone-container {
+    display: flex;
+    align-items: center;
+}
+
+.timer-stone {
+    height: 30px;
+    width: 30px;
+    margin: 6px;
+    /* position: absolute; */
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#right-timer-stone {
     float: right;
 }
 
-#left-timer{
-    margin-right: auto;
-    float: left;
-}
+/* .timer-text {
+    padding: 8px 0px;
+} */
+
 
 #game-board {
     display: flex;
