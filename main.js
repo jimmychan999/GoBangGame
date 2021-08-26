@@ -4,27 +4,7 @@ const BLACK = 1;
 const WHITE = 2;
 const THEME_LIGHT = "light";
 const THEME_DARK = "dark";
-
-// CSS constants
-const COLOR_STR_TRANSPARENT = "rgba(0, 0, 0, 0)";
-const COLOR_STR_WHITE = "rgb(245, 245, 245)";
-const COLOR_STR_BLACK = "rgb(100, 100, 100)";
-const COLOR_STR_HIGHLIGHT_WHITE = "rgba(245, 245, 245, .35)";
-const COLOR_STR_HIGHLIGHT_BLACK = "rgba(100, 100, 100, .35)";
-const BOX_SHADOW = "1px 3px 4px -2px rgb(38 38 38 / 40%), 0px 5px 6px -3px #000000bb";
-const BOX_SHADOW_BLACK_STONE = "inset -10px -6px 16px rgba(0, 0, 0, 0.8), " + BOX_SHADOW;
-const BOX_SHADOW_WHITE_STONE = "inset -5px -3px 8px rgba(0, 0, 0, 0.3), " + BOX_SHADOW;
-const BACKGROUND_IMAGE_STONE = "inset -5px -3px 8px rgba(0, 0, 0, 0.3)";
-
-
-// Elements
-const gameBody = document.getElementById("game-body");
-const buttonStartGame = document.getElementById("btn-start-game");
-const buttonEndGame = document.getElementById("btn-end-game");
-const gameBoard = document.getElementById("game-board");
-const tileContainer = document.getElementById("game-board-tiles");
-const gridContainer = document.getElementById("game-board-grids");
-
+const THEME_HIGH_CONTRAST = "high-contrast"
 
 // Starting parameters
 let curTheme = THEME_LIGHT;
@@ -36,13 +16,39 @@ let boardEdgeLength = 30; // Distance from outermost line to edge of board
 let stoneDiameter = 32;
 
 let boardBorderRadius = 15;
-// let stoneSep = 5;  // TODO: remove
 
 // Other global variables
 let board = [];     // 2D array that represent current state of the board
 let tileDivs = [];  // 1D array of document elements
 let verLines = [];
 let horLines = [];
+
+// CSS constants
+const COLOR_STR_TRANSPARENT = "rgba(0, 0, 0, 0)";
+const COLOR_STR_WHITE = "rgb(245, 245, 245)";
+const COLOR_STR_BLACK = "rgb(100, 100, 100)";
+const COLOR_STR_HIGHLIGHT_WHITE = "rgba(245, 245, 245, .35)";
+const COLOR_STR_HIGHLIGHT_BLACK = "rgba(100, 100, 100, .35)";
+
+// CSS global vars
+let highlightWidth = stoneDiameter / 8;
+let BOX_SHADOW = "1px 3px 4px -2px rgb(38 38 38 / 40%), 0px 5px 6px -3px #000000bb";
+let BOX_SHADOW_HIGHLIGHT = `0px 0px ${highlightWidth * 4}px ${highlightWidth}px rgb(160 38 38 / 60%)`;
+let BOX_SHADOW_BLACK_STONE = "inset -10px -6px 16px rgba(0, 0, 0, 0.8), " + BOX_SHADOW;
+let BOX_SHADOW_WHITE_STONE = "inset -5px -3px 8px rgba(0, 0, 0, 0.3), " + BOX_SHADOW;
+let BOX_SHADOW_HIGHLIGHT_BLACK_STONE = "inset -10px -6px 16px rgba(0, 0, 0, 0.8), " + BOX_SHADOW_HIGHLIGHT;
+let BOX_SHADOW_HIGHLIGHT_WHITE_STONE = "inset -5px -3px 8px rgba(0, 0, 0, 0.3), " + BOX_SHADOW_HIGHLIGHT;
+let BACKGROUND_IMAGE_STONE = "inset -5px -3px 8px rgba(0, 0, 0, 0.3)";
+
+
+// Elements
+const gameBody = document.getElementById("game-body");
+const buttonStartGame = document.getElementById("btn-start-game");
+const buttonEndGame = document.getElementById("btn-end-game");
+const gameBoard = document.getElementById("game-board");
+const tileContainer = document.getElementById("game-board-tiles");
+const gridContainer = document.getElementById("game-board-grids");
+
 
 function genBoardLines() {
     let padding = `${boardEdgeLength}px`;
@@ -81,7 +87,6 @@ function updateBoardSize() {
 }
 
 function initBoard() {
-    console.log("Initting board");
     genBoardLines();
     genTileDivs();
     initBoardArray();
@@ -113,8 +118,6 @@ function genTileDivs() {
         for (let j = 0; j < boardNumRows; j++) {
             tileDiv = document.createElement("div");
             tileDiv.setAttribute("class", "tile-div");
-            // tileDiv.style.left = `${boardEdgeLength + j * (stoneDiameter + stoneSep)}px`;
-            // tileDiv.style.top = `${boardEdgeLength + i * (stoneDiameter + stoneSep)}px`;
             tileDiv.setAttribute("id", "tile: " + i.toString() + "," + j.toString());
             tileDiv.setAttribute("onclick", `onClickDivAt(${i}, ${j})`);
 
@@ -187,13 +190,14 @@ function resizeBoardLines() {
 function updateBoardSizeParams() {
     /**
      * Set parameters that control the appearance of the game board.
-     * Specifically, set update the following variables:
+     * Specifically, set the following variables depending on size of 
+     * the page:
      * 
      *   boardLength, boardEdgeLength, stoneDiameter, boardBorderRadius
      * 
      */
     let gameBodyWidth = gameBody.clientWidth * 0.9;
-    let gameBodyHeight = document.body.clientHeight * 0.7;
+    let gameBodyHeight = document.body.clientHeight * 0.85 - 128;
     boardLength = Math.min(gameBodyHeight, gameBodyWidth);
     boardEdgeLength = boardLength * 0.06;
     let lineGap = boardLength / (boardNumRows - 1);
@@ -252,7 +256,9 @@ function isWon(x, y) {
     // Check if the given piece participate in a 5-in-a-row
     // empty, out of board (negative and bigger than length)
     
-    if (checkDirectionWin(x, y)) {
+    let winningPos = checkDirectionWin(x, y)
+    if (winningPos.length > 0) {
+        for (let pos of winningPos) highlightStone(pos[0], pos[1])
         if (board[x][y] == BLACK) {
             setTimeout(function() {
                 console.log("BLACK won")
@@ -274,110 +280,68 @@ function isWon(x, y) {
     }
 }
 
+function highlightStone(x, y) {
+    let tile = getTileDiv(x, y);
+    if (board[x][y] == BLACK) {
+        tile.style.boxShadow = BOX_SHADOW_HIGHLIGHT_BLACK_STONE;
+    } else {
+        tile.style.boxShadow = BOX_SHADOW_HIGHLIGHT_WHITE_STONE;
+    }
+}
+
 function isOutOfBounds(x, y) {
     return (x < 0 || x >= boardNumRows || y < 0 || y >= boardNumRows)
 }
 
 function checkDirectionWin(x, y) {
+    // Return an array of pos that participate in winning rows
+    function getConsecCountInDir(xStart, yStart, xDir, yDir) {
+        let color = board[xStart][yStart]
+        let x = xStart + xDir
+        let y = yStart + yDir
+        let count = 0
+        while (!isOutOfBounds(x, y) && board[x][y] == color) {
+            x += xDir
+            y += yDir
+            ++count
+        }
+        return count
+    }
+
+    let consecT = getConsecCountInDir(x, y, -1, 0)
+    let consecB = getConsecCountInDir(x, y, 1, 0)
+    let consecL = getConsecCountInDir(x, y, 0, -1)
+    let consecR = getConsecCountInDir(x, y, 0, 1)
+    let consecTL = getConsecCountInDir(x, y, -1, -1)
+    let consecTR = getConsecCountInDir(x, y, -1, 1)
+    let consecBL = getConsecCountInDir(x, y, 1, -1)
+    let consecBR = getConsecCountInDir(x, y, 1, 1)
     
-    let currentStoneColor = board[x][y];
-    let stoneConsecCountHori = 1;
-    let stoneConsecCountVert = 1;
-    let stoneConsecCountDiagonal1 = 1;
-    let stoneConsecCountDiagonal2 = 1;
+    let winningPos = []
 
-    // checking 5 horizontally
-    for(let i = 1; i < 5; ++i) {
-        if (isOutOfBounds(x, y+i)) {
-            break;
-        }
-        if (!isTileOccupied(x, y+i) || board[x][y+i] != currentStoneColor) {
-            break;
-        }
-        stoneConsecCountHori++
+    // vertical
+    if (consecB + consecT >= 4) {
+        for (let i = 1; i <= consecT; ++i) winningPos.push([x - i, y])
+        for (let i = 1; i <= consecB; ++i) winningPos.push([x + i, y])
     }
-    for(let i = 1; i < 5; ++i) {
-        if (isOutOfBounds(x, y-i)) {
-            break;
-        }
-        if (!isTileOccupied(x, y-i) || board[x][y-i] != currentStoneColor) {
-            break;
-        }
-        stoneConsecCountHori++
+    // horizontal
+    if (consecL + consecR >= 4) {
+        for (let i = 1; i <= consecL; ++i) winningPos.push([x, y - i])
+        for (let i = 1; i <= consecR; ++i) winningPos.push([x, y + i])
     }
-    if (stoneConsecCountHori >= 5) {
-        return true;
+    // top left
+    if (consecTL + consecBR >= 4) {
+        for (let i = 1; i <= consecTL; ++i) winningPos.push([x - i, y - i])
+        for (let i = 1; i <= consecBR; ++i) winningPos.push([x + i, y + i])
     }
-
-    // checking 5 vertically
-    for(let i = 1; i < 5; ++i) {
-        if (isOutOfBounds(x+i, y)) {
-            break;
-        }
-        if (!isTileOccupied(x+i, y) || board[x+i][y] != currentStoneColor) {
-            break;
-        }
-        stoneConsecCountVert++
+    
+    // top right
+    if (consecTR + consecBL >= 4) {
+        for (let i = 1; i <= consecTR; ++i) winningPos.push([x - i, y + i])
+        for (let i = 1; i <= consecBL; ++i) winningPos.push([x + i, y - i])
     }
-    for(let i = 1; i < 5; ++i) {
-        if (isOutOfBounds(x-i, y)) {
-            break;
-        }
-        if (!isTileOccupied(x-i, y) || board[x-i][y] != currentStoneColor) {
-            break;
-        }
-        stoneConsecCountVert++
-    }
-    if (stoneConsecCountVert >= 5) {
-        return true;
-    }
-
-    // checking diagonal left top
-    for(let i = 1; i < 5; ++i) {
-        if (isOutOfBounds(x+i, y+i)) {
-            break;
-        }
-        if (!isTileOccupied(x+i, y+i) || board[x+i][y+i] != currentStoneColor) {
-            break;
-        }
-        stoneConsecCountDiagonal1++
-    }
-    for(let i = 1; i < 5; ++i) {
-        if (isOutOfBounds(x-i, y-i)) {
-            break;
-        }
-        if (!isTileOccupied(x-i, y-i) || board[x-i][y-i] != currentStoneColor) {
-            break;
-        }
-        stoneConsecCountDiagonal1++
-    }
-    if (stoneConsecCountDiagonal1 >= 5) {
-        return true;
-    }
-
-    // checking diagonal right top
-    for(let i = 1; i < 5; ++i) {
-        if (isOutOfBounds(x+i, y-i)) {
-            break;
-        }
-        if (!isTileOccupied(x+i, y-i) || board[x+i][y-i] != currentStoneColor) {
-            break;
-        }
-        stoneConsecCountDiagonal2++
-    }
-    for(let i = 1; i < 5; ++i) {
-        if (isOutOfBounds(x-i, y+i)) {
-            break;
-        }
-        if (!isTileOccupied(x-i, y+i) || board[x-i][y+i] != currentStoneColor) {
-            break;
-        }
-        stoneConsecCountDiagonal2++
-    }
-    if (stoneConsecCountDiagonal2 >= 5) {
-        return true;
-    }
-
+    if (winningPos.length > 0) winningPos.push([x, y])
+    return winningPos
 }
 
 function showBoard() {
@@ -393,7 +357,6 @@ function hideBoardStones() {
 
 function initTheme() {
     let storedTheme = localStorage.getItem("theme");
-    // alert(storedTheme);
     if (storedTheme == null) {
         curTheme = THEME_LIGHT;
     } else {
@@ -410,6 +373,8 @@ function setTheme(theme) {
 function changeTheme() {
     if (curTheme == THEME_LIGHT) {
         curTheme = THEME_DARK;
+    } else if (curTheme == THEME_DARK) {
+        curTheme = THEME_HIGH_CONTRAST;
     } else {
         curTheme = THEME_LIGHT;
     }

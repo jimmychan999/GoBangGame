@@ -1,0 +1,30 @@
+:root {
+    --font: "Roboto Mono";
+    --color-bg: black;
+    --color-text: rgb(209, 209, 209);
+
+    --color-bg-nav-bar: black;
+    --color-bg-nav-menu-items-hover: white;
+    --color-text-nav-menu-items-hover: rgb(49, 49, 49);
+    --color-logo-text: white;
+    
+    --color-footer-text: rgb(140, 140, 140);
+    --color-footer-bg: rgb(60, 60, 60);
+    --color-footer-line: rgba(255, 255, 255, 0.4);
+
+    --color-btn: black;
+    --color-btn-disabled: gray;
+    --color-btn-text: rgb(255, 255, 255);
+    --color-btn-hover: gray;
+    --color-btn-text-disabled: rgba(255, 255, 255, 0.7);
+
+    --color-board: black;
+    --color-board-line: white;
+    --color-stone-hover: rgba(190, 100, 100, 0.3);
+    
+    --border-width-nav-bar: 2px;
+    --border-color-nav-bar: white;
+
+    --border-width-button: 2px;
+    --border-color-button: white;
+}

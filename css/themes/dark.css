@@ -21,4 +21,7 @@
     --color-board: rgb(199, 136, 84);
     --color-board-line: rgb(129, 87, 63);
     --color-stone-hover: rgba(190, 100, 100, 0.3);
+    
+    --border-width-nav-bar: 0px;
+    --border-width-button: 0px;
 }
