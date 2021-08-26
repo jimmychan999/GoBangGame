@@ -394,6 +394,7 @@ function startGameBtnClick() {
 
 function startGame() {
     clearBoard();
+    isWhoseTurn = BLACK;
     buttonStartGame.disabled = true;
     buttonEndGame.disabled = false;
     
