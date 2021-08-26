@@ -193,9 +193,9 @@ function updateBoardSizeParams() {
      *   boardLength, boardEdgeLength, stoneDiameter, boardBorderRadius
      * 
      */
-    let gameBodyWidth = gameBody.clientWidth * 0.9;
+    let maxWidth = gameBody.clientWidth - 2 * boardEdgeLength;
     let gameBodyHeight = document.body.clientHeight * 0.85 - 128;
-    boardLength = Math.min(gameBodyHeight, gameBodyWidth);
+    boardLength = Math.min(gameBodyHeight, maxWidth);
     let lineGap = boardLength / (boardNumRows - 1);
     stoneDiameter = lineGap * 0.84;
     boardEdgeLength = stoneDiameter * 1;

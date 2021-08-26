@@ -27,4 +27,7 @@
 
     --border-width-button: 1px;
     --border-color-button: white;
+
+    --border-width-timer: 1px;
+    --border-color-timer: white;
 }
