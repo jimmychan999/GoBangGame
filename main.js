@@ -22,6 +22,8 @@ const gameBody = document.getElementById("game-body");
 const buttonStartGame = document.getElementById("btn-start-game");
 const buttonEndGame = document.getElementById("btn-end-game");
 const gameBoard = document.getElementById("game-board");
+const tileContainer = document.getElementById("game-board-tiles");
+const gridContainer = document.getElementById("game-board-grids");
 
 
 // Starting parameters
@@ -56,15 +58,14 @@ function genBoardLines() {
         return line;
     }
 
-    let boardLinesContainer = document.getElementById("board-lines-container");
     // Generate grid lines on board
     for (let i = 0; i < boardNumRows; ++i) {
         let verLine = genVerLine();
         let horLine = genHorLine();
         verLines.push(verLine);
         horLines.push(horLine);
-        gameBoard.appendChild(horLine);
-        gameBoard.appendChild(verLine);
+        gridContainer.appendChild(horLine);
+        gridContainer.appendChild(verLine);
     }
 }
 
@@ -141,7 +142,7 @@ function genTileDivs() {
     
     // Set each tile div as children of "game-board" div.
     for (tileDiv of tileDivs) {
-        gameBoard.appendChild(tileDiv);
+        tileContainer.appendChild(tileDiv);
     }
 }
 
@@ -254,13 +255,22 @@ function isWon(x, y) {
     if (checkDirectionWin(x, y)) {
         if (board[x][y] == BLACK) {
             setTimeout(function() {
-                alert("BLACK won")
-            }, 10)
+                console.log("BLACK won")
+                animationShowGamOverText("BLACK WON");
+                setTimeout(function() {
+                    document.querySelector(".popupBarContainer").style.backgroundColor = "#000000aa";
+                }, 2)
+            }, 20)
         } else {
             setTimeout(function() {
-                alert("WHITE won")
-            }, 10)
+                console.log("WHITE won")
+                animationShowGamOverText("WHITE WON");
+                setTimeout(function() {
+                    document.querySelector(".popupBarContainer").style.backgroundColor = "#ffffffaa";
+                }, 2)
+            }, 20)
         }
+        endGame();
     }
 }
 
@@ -412,6 +422,11 @@ function clearBoard() {
     hideBoardStones();
 }
 
+function startGameBtnClick() {
+    animationRemoveGameOverText();
+    startGame();
+}
+
 function startGame() {
     clearBoard();
     buttonStartGame.disabled = true;
@@ -419,6 +434,11 @@ function startGame() {
     
     // show pulse animation on board
     gameBoard.className = 'start';
+}
+
+function endGameBtnClick() {
+    animationShowGamOverText("Game Over");
+    endGame();
 }
 
 function endGame() {

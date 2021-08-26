@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" id="theme-switcher" href="../css/themes/light.css">
     <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body onload="onLoad()">
     <div id="container">
@@ -35,16 +36,14 @@
                     <h1>Go Bang</h1>
                 </div>
             </div> -->
-            
             <div id="game-body">
-
                 <div id="top-panel">
                     <div id="top-panel-left" class="top-panel-item">
                         <button id="btn-change-theme" onclick="changeTheme()">Change theme</button>
                     </div>
                     <div id="top-panel-center" class="top-panel-item">
-                        <button id="btn-start-game" onclick="startGame()">Start game</button>
-                        <button id="btn-end-game" disabled onclick="endGame()">End game</button>
+                        <button id="btn-start-game" onclick="startGameBtnClick()">Start game</button>
+                        <button id="btn-end-game" disabled onclick="endGameBtnClick()">End game</button>
                     </div>
                     <div id="top-panel-right" class="top-panel-item">
                         <div id="timer">
@@ -54,6 +53,8 @@
                 </div>
                 <!-- board here -->    
                 <div id="game-board">
+                    <div id="game-board-grids"></div>
+                    <div id="game-board-tiles"></div>
                     <!-- JS will generate elements here -->
                 </div>
                 <div id="bottom-panel">
@@ -77,5 +78,6 @@
         
     <!-- scripts -->
     <script type="text/javascript" src="../main.js"></script>
+    <script type="text/javascript" src="../winLose.js"></script>
 </body>
 </html>

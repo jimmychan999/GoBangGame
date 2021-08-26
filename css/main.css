@@ -1,13 +1,13 @@
 /* variables */
 :root {
     --nav-bar-height: 64px;
-    --nav-bar-padding-hor: 64px;
+    --nav-bar-padding-hor: min(5vw, 120px);
     --nav-menu-items-height: 24px;
     --main-logo-width: 128px;
     
-    --body-padding-hor: 64px;
+    --body-padding-hor: min(5vw, 64px);
 
-    --footer-padding-hor: 120px;
+    --footer-padding-hor: min(8vw, 120px);
     --footer-padding-bottom: 48px;
 }
 
@@ -25,8 +25,8 @@ button {
     background-color: var(--color-btn);
     border-width: 0;
     border-radius: 12px;
-    padding: 8px;
-    margin: 8px;
+    padding: 8px 10px;
+    margin: 4px;
     color: var(--color-btn-text);
     font-weight: bold;
 }
@@ -153,29 +153,28 @@ a {
 #top-panel {
     display: flex;
     position: relative;
-    padding: 12px;
-    padding-left: 72px;
-    padding-right: 72px;
+    
+    max-width: 80vh;
+    margin: auto;
+    padding: 12px 4px;
     height: 64px;
     align-items: center;
     justify-content: center;
 }
 
 #top-panel-left {
-    float: left;
-    flex: 0 0 30%;
+    flex: 1;
 }
 
 #top-panel-center {
-    flex: 0 0 40%;
+    flex: 1.6;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 #top-panel-right {
-    float: right;
-    flex: 0 0 30%;
+    flex: 1;
 }
 
 #timer {
@@ -184,6 +183,7 @@ a {
 }
 
 #game-board {
+    display: flex;
     background-color: var(--color-board);
     /* width: 680px; */
     /* height: 680px; */
@@ -249,4 +249,143 @@ a {
 	0% {transform: scale(1);}
 	50% {transform: scale(1.05);}
 	100% {transform: scale(1);}
+}
+
+.popupGameOverContainer {
+    z-index: 5;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    top: -8px;
+    left: -8px;
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+
+    user-select: none;
+    backdrop-filter: blur(2px);
+
+    animation: popupShow 1s;
+    animation-iteration-count: 1;
+    animation-timing-function: cubic-bezier(0, 0, 0, 1);
+}
+
+
+
+.popupGameOver {
+    user-select: none;
+    position: relative;
+    min-width: 40px;
+    width: calc(50px + 40%);
+}
+
+.popupGameOverTextContainer {
+    user-select: none;
+    width: 100%;
+    height: min(7vw,7vh);
+    overflow: hidden;
+    user-select: none;
+}
+
+.popupGameOverText {
+    user-select: none;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: min(7vw, 6vh);
+    color: white;
+    
+    animation: popupShowText 1.3s;
+    animation-iteration-count: 1;
+    animation-timing-function: cubic-bezier(0, 0, 0, 1);
+    text-shadow: 3px 2px 6px #000000d4;
+}
+
+.popupBarContainer {
+    user-select: none;
+    position: relative;
+    z-index: 5;
+    margin: auto;
+    min-width: 40px;
+    min-height: 2px;
+    height: min(1vw,7px);
+    background-color: var(--color-btn);;   
+    width: calc(100% - 20px);
+    
+    border-radius: 100px;
+    
+    animation: popupShowBar .8s;
+    animation-iteration-count: 1;
+    animation-timing-function: cubic-bezier(0.42, 0, 0, 1);
+    box-shadow: 0px 2px 6px 0px rgb(0 0 0 / 64%);
+}
+
+@keyframes popupShow {
+	0% {opacity: 0;}
+	100% {opacity: 1;}
+}
+
+@keyframes popupShowText {
+	0% {transform: translateY(100%);}
+	20% {transform: translateY(100%);}
+	100% {transform: translateY(0%);}
+}
+
+@keyframes popupShowBar {
+	0% {transform: scalex(0);}
+	100% {transform: scale(1);}
+}
+
+
+@keyframes popupHide {
+	0% {transform: scalex(0);}
+	100% {transform: scale(1);}
+}
+
+
+
+.popupExtras {
+    user-select: none;
+    height: 0%;
+    /* background-color: var(--color-bg); */
+    border-radius: 0 0 13px 13px;
+    width: calc(50px + 32%);
+
+    overflow: hidden;
+    animation: popupExtrasShow 1s;
+    animation-timing-function: ease;
+    animation-delay: 1.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+
+    /* box-shadow: 0px 10px 13px -7px #0000009e, 1px 5px 7px -2px rgb(38 38 38 / 15%); */
+}
+
+.popupExtrasContent {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    animation: popupExtrasContentShow 1s ease 1.5s 1 normal forwards;
+}
+
+.popupExtrasContent > button {
+    box-shadow: 0px 3px 5px 0px #00000069, 2px 1px 3px -2px rgb(38 38 38 / 15%);
+}
+
+
+
+@keyframes popupExtrasShow {
+	0% {height: 0%;}
+	100% {height: 100px;}
+}
+
+@keyframes popupExtrasContentShow {
+	0% {margin-top: -40px; opacity: 0;}
+	20% {margin-top: -40px; opacity: 0;}
+	100% {margin-top: 15px; opacity: 1;}
 }
