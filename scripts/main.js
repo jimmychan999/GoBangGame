@@ -10,6 +10,7 @@ let stoneDiameter = 32;
 let boardBorderRadius = 15;
 
 // Other global variables
+let isPlaying = false;
 let isWhoseTurn = BLACK;
 let blackTime = 0;
 let whiteTime = 0;
@@ -48,8 +49,8 @@ const rightTimerStone = document.getElementById("right-timer-stone");
 const leftTimerTextP = document.getElementById("left-timer-text-p");
 const rightTimerTextP = document.getElementById("right-timer-text-p");
 
-let leftStopwatch = new Stopwatch(leftTimerTextP, 20);
-let rightStopwatch = new Stopwatch(rightTimerTextP, 20);
+let leftStopwatch;
+let rightStopwatch;
 
 
 function genBoardLines() {
@@ -368,6 +369,9 @@ function initTimer() {
     // Both player start with 0 time spent
     whiteTime = 0
     blackTime = 0
+    leftStopwatch = new Stopwatch(leftTimerTextP, 20);
+    rightStopwatch = new Stopwatch(rightTimerTextP, 20);
+
 }
 
 function hideBoardStones() {
@@ -383,8 +387,13 @@ function clearBoard() {
 }
 
 function startGameBtnClick() {
-    animationRemoveGameOverText();
-    startGame();
+    if (!isPlaying) {
+        animationRemoveGameOverText();
+        startGame();
+    } else {
+        animationShowGamOverText("Game Over");
+        endGame();
+    }
 }
 
 function startStopwatch() {
@@ -400,8 +409,10 @@ function startStopwatch() {
 function startGame() {
     clearBoard()
     isWhoseTurn = BLACK
-    buttonStartGame.disabled = true
-    buttonEndGame.disabled = false
+    // buttonStartGame.disabled = true
+    // buttonEndGame.disabled = false
+    buttonStartGame.textContent = "End Game"
+    isPlaying = true
     
     // show pulse animation on board
     gameBoard.className = 'start'
@@ -414,9 +425,11 @@ function endGameBtnClick() {
 }
 
 function endGame() {
+    isPlaying = false;
     gameBoard.className = '';
-    buttonStartGame.disabled = false;
-    buttonEndGame.disabled = true;
+    // buttonStartGame.disabled = false;
+    // buttonEndGame.disabled = true;
+    buttonStartGame.textContent = "Start Game";
 
     leftStopwatch.stop()
     rightStopwatch.stop()
@@ -439,6 +452,10 @@ function onLoad() {
 }
 
 function onloadHelp() {
+    initTheme();
+}
+
+function onLoadSettings() {
     initTheme();
 }
 

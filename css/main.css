@@ -4,6 +4,11 @@
     --button-margin: 4px;
     --button-border-radius: 12px;
 
+    --input-width: 32px;
+    --input-height: 18px;
+    --input-border-radius: 10px;
+    --input-padding: calc(4px - var(--input-border-width)) calc(8px - var(--input-border-width));
+
     --nav-bar-height: 52px;
     --nav-bar-padding-hor: min(5vw, 120px);
     --nav-menu-items-height: 24px;
@@ -49,6 +54,26 @@ button:hover {
 button:disabled {
     background-color: var(--color-btn-disabled);
     color: var(--color-btn-text-disabled);
+}
+
+input {
+    outline: none;
+    border-style: solid;
+    border-width: var(--input-border-width);
+    border-radius: var(--input-border-radius);
+    border-color: var(--input-border-color);
+    padding: var(--input-padding);
+    width: var(--input-width);
+    height: var(--input-height);
+    vertical-align: middle;
+    font-family: "Roboto Mono";
+    color: var(--input-color);
+    -webkit-appearance: none;
+    background-color: var(--input-bg-color);
+}
+
+input::placeholder {
+    color: var(--input-placeholder-color);
 }
 
 a {
@@ -201,7 +226,7 @@ a {
 
 .timer {
     display: flex;
-    gap: 8px;
+    /* gap: 8px; */
     vertical-align: middle;
     height: var(--timer-height);
     background-color: var(--color-bg-nav-bar);
@@ -227,6 +252,7 @@ a {
 .timer-text p {
     margin-block-start: 0px;
     margin-block-end: 0px;
+    margin: 0px 6px;
     line-height: var(--timer-height);
     vertical-align: middle;
 }
@@ -318,6 +344,21 @@ a {
     margin-right: auto;
     display: block;
 }
+
+/* Settings */
+.settings-items {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+}
+.settings-items p {
+    line-height: normal;
+    vertical-align: middle;
+    margin: 0px;
+    font-size: 16px;
+}
+
 
 @keyframes pulse {
     0% {transform: scale(1);}

@@ -8,7 +8,7 @@
     <link rel="stylesheet" id="theme-switcher" href="../css/themes/light.css">
     <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.css">
 </head>
-<body onload="onLoad()">
+<body onload="onLoadSettings()">
     <div id="container">
         <div id="nav-bar">
             <!-- Navigation bar that follows the screen down, always showing-->
@@ -35,7 +35,22 @@
         
         <div id="body">
             <h2>Appearance</h2>
-            <button id="btn-change-theme" onclick="changeTheme()">Change theme</button>
+            <div class="settings-items">
+                <div class="settings-items-name">
+                    <p>Theme:</p>
+                </div>
+                <div class="settings-items-options">
+                    <button id="btn-change-theme" onclick="changeTheme()">Change theme</button>
+                </div>
+            </div>
+            <div class="settings-items">
+                <div class="settings-items-name">
+                    <p>Board size:</p> 
+                </div>
+                <div class="settings-items-options">
+                    <input id="board-size-input" type="text" placeholder="5~50"></input>
+                </div>
+            </div>
             <h2>Rules</h2>
             <div class="settings-rule-item"></div>
             <p>Upcoming: choose which rule or variant of Go Bang to use.</p>
