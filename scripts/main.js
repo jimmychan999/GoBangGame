@@ -45,6 +45,11 @@ const tileContainer = document.getElementById("game-board-tiles");
 const gridContainer = document.getElementById("game-board-grids");
 const leftTimerStone = document.getElementById("left-timer-stone");
 const rightTimerStone = document.getElementById("right-timer-stone");
+const leftTimerTextP = document.getElementById("left-timer-text-p");
+const rightTimerTextP = document.getElementById("right-timer-text-p");
+
+let leftStopwatch = new Stopwatch(leftTimerTextP, 20);
+let rightStopwatch = new Stopwatch(rightTimerTextP, 20);
 
 
 function genBoardLines() {
@@ -216,8 +221,9 @@ function isTileOccupied(x, y) {
 function onClickDivAt(x, y) {
     if (!isTileOccupied(x, y)) {
         putStoneAt(x, y);
-        isWon(x, y);
-        nextTurn();
+        if (!isWon(x, y)) {
+            nextTurn();
+        }
     }
 }
 
@@ -239,8 +245,12 @@ function putStoneAt(x, y) {
 function nextTurn() {
     if (isWhoseTurn == BLACK) {
         isWhoseTurn = WHITE;
+        leftStopwatch.stop();
+        rightStopwatch.start();
     } else {
         isWhoseTurn = BLACK;
+        rightStopwatch.stop();
+        leftStopwatch.start();
     }
 }
 
@@ -274,7 +284,9 @@ function isWon(x, y) {
             }, 20)
         }
         endGame();
+        return true;
     }
+    return false;
 }
 
 function highlightStone(x, y) {
@@ -304,7 +316,7 @@ function checkDirectionWin(x, y) {
         }
         return count
     }
-
+    
     let consecT = getConsecCountInDir(x, y, -1, 0)
     let consecB = getConsecCountInDir(x, y, 1, 0)
     let consecL = getConsecCountInDir(x, y, 0, -1)
@@ -315,7 +327,7 @@ function checkDirectionWin(x, y) {
     let consecBR = getConsecCountInDir(x, y, 1, 1)
     
     let winningPos = []
-
+    
     // vertical
     if (consecB + consecT >= 4) {
         for (let i = 1; i <= consecT; ++i) winningPos.push([x - i, y])
@@ -348,11 +360,12 @@ function initTimerStone() {
     rightTimerStone.style.backgroundColor = COLOR_STR_WHITE;
     rightTimerStone.style.boxShadow = BOX_SHADOW_WHITE_STONE;
     rightTimerStone.backgroundImage = BACKGROUND_IMAGE_STONE;
-    
 }
 
 function initTimer() {
     initTimerStone()
+    
+    // Both player start with 0 time spent
     whiteTime = 0
     blackTime = 0
 }
@@ -374,14 +387,25 @@ function startGameBtnClick() {
     startGame();
 }
 
+function startStopwatch() {
+    leftStopwatch.reset()
+    rightStopwatch.reset()
+    if (isWhoseTurn == BLACK) {
+        leftStopwatch.start()
+    } else if (isWhoseTurn == WHITE) {
+        rightStopwatch.start()
+    }
+}
+
 function startGame() {
-    clearBoard();
-    isWhoseTurn = BLACK;
-    buttonStartGame.disabled = true;
-    buttonEndGame.disabled = false;
+    clearBoard()
+    isWhoseTurn = BLACK
+    buttonStartGame.disabled = true
+    buttonEndGame.disabled = false
     
     // show pulse animation on board
-    gameBoard.className = 'start';
+    gameBoard.className = 'start'
+    startStopwatch()
 }
 
 function endGameBtnClick() {
@@ -393,6 +417,9 @@ function endGame() {
     gameBoard.className = '';
     buttonStartGame.disabled = false;
     buttonEndGame.disabled = true;
+
+    leftStopwatch.stop()
+    rightStopwatch.stop()
 }
 
 function goToMainMenu() {
