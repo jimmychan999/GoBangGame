@@ -3,12 +3,15 @@
     --button-padding: calc(8px - var(--border-width-button)) calc(10px - var(--border-width-button));
     --button-margin: 4px;
     --button-border-radius: 12px;
-
+    
     --input-width: 32px;
     --input-height: 18px;
     --input-border-radius: 10px;
-    --input-padding: calc(4px - var(--input-border-width)) calc(8px - var(--input-border-width));
-
+    --input-padding: calc(4px - var(--input-border-width)) calc(6px - var(--input-border-width));
+    
+    --select-height: 21px;
+    --seelct-padding: 4px;
+    
     --nav-bar-height: 52px;
     --nav-bar-padding-hor: min(5vw, 120px);
     --nav-menu-items-height: 24px;
@@ -19,16 +22,16 @@
     --timer-height: 40px;
     --timer-border-radius: 24px;
     --timer-padding: calc(4px - var(--border-width-timer)) calc(12px - var(--border-width-timer));
-
+    
     --footer-padding-hor: min(8vw, 120px);
     --footer-padding-bottom: 48px;
 }
 
 /* General */
 html, body {
-    background-color: var(--color-bg);
+    background-color: var(--bg-color);
     font-family: var(--font), 'Consolas', 'Courier New', Courier, monospace;
-    color: var(--color-text);
+    color: var(--text-color);
     margin: 0;
     padding: 0;
     height: 100%;
@@ -68,12 +71,45 @@ input {
     vertical-align: middle;
     font-family: "Roboto Mono";
     color: var(--input-color);
+    text-align: center;
     -webkit-appearance: none;
     background-color: var(--input-bg-color);
 }
 
 input::placeholder {
     color: var(--input-placeholder-color);
+}
+
+
+
+select {
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    border-radius: var(--button-border-radius);
+    border-width: var(--input-border-width);
+    border-style: solid;
+    border-color: var(--input-border-color);
+    /* height: var(--select-height); */
+    padding: var(--input-padding);
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--text-color);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 a {
@@ -94,7 +130,7 @@ a {
     display: flex;
     /* width: 100%; */
     height: var(--nav-bar-height);
-    background-color: var(--color-bg-nav-bar);
+    background-color: var(--nav-bar-bg-color);
     box-shadow: 0 2px 4px 0 rgb(0, 0, 0, 0.2);
     margin-top: 0px;
     /* margin-bottom: 2rem; */
@@ -147,8 +183,8 @@ a {
     margin-top: auto;
     margin-bottom: auto;
     border-radius: 8px;
-    color: var(--color-text-nav-menu-items);
-    background-color: var(--color-bg-nav-bar);
+    color: var(--text-color-nav-menu-items);
+    background-color: var(--nav-bar-bg-color);
 }
 
 .nav-menu-items a {
@@ -156,13 +192,13 @@ a {
     padding-right: 12px;
     line-height: var(--nav-menu-items-height);
     vertical-align: middle;
-    background-color: var(--color-bg-nav-bar);
+    background-color: var(--nav-bar-bg-color);
     border-radius: 6px;
 }
 
 .nav-menu-items a:hover {
-    background-color: var(--color-bg-nav-menu-items-hover);
-    color: var(--color-text-nav-menu-items-hover);
+    background-color: var(--nav-menu-items-hover-bg-color);
+    color: var(--text-color-nav-menu-items-hover);
 }
 
 /* Header */
@@ -229,7 +265,7 @@ a {
     /* gap: 8px; */
     vertical-align: middle;
     height: var(--timer-height);
-    background-color: var(--color-bg-nav-bar);
+    background-color: var(--nav-bar-bg-color);
     padding: var(--timer-padding);
     border-radius: var(--timer-border-radius);
     box-shadow: 0px 4px 6px -4px #0000009e;
@@ -378,10 +414,10 @@ a {
     width: 100%;
     height: 100%;
     padding: 8px;
-
+    
     user-select: none;
     backdrop-filter: blur(2px);
-
+    
     animation: popupShow 1s;
     animation-iteration-count: 1;
     animation-timing-function: cubic-bezier(0, 0, 0, 1);
@@ -467,17 +503,17 @@ a {
 .popupExtras {
     user-select: none;
     height: 0%;
-    /* background-color: var(--color-bg); */
+    /* background-color: var(--bg-color); */
     border-radius: 0 0 13px 13px;
     width: calc(50px + 32%);
-
+    
     overflow: hidden;
     animation: popupExtrasShow 1s;
     animation-timing-function: ease;
     animation-delay: 1.1s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
-
+    
     /* box-shadow: 0px 10px 13px -7px #0000009e, 1px 5px 7px -2px rgb(38 38 38 / 15%); */
 }
 

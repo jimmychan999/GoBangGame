@@ -1,11 +1,11 @@
 :root {
     --font: "Roboto Mono";
-    --color-bg: black;
-    --color-text: rgb(209, 209, 209);
+    --bg-color: black;
+    --text-color: rgb(209, 209, 209);
 
-    --color-bg-nav-bar: black;
-    --color-bg-nav-menu-items-hover: white;
-    --color-text-nav-menu-items-hover: rgb(49, 49, 49);
+    --nav-bar-bg-color: black;
+    --nav-menu-items-hover-bg-color: white;
+    --text-color-nav-menu-items-hover: rgb(49, 49, 49);
     --color-logo-text: white;
     
     --color-footer-text: rgb(140, 140, 140);
