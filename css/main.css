@@ -492,6 +492,19 @@ a {
     box-shadow: 0px 3px 5px 0px #00000069, 2px 1px 3px -2px rgb(38 38 38 / 15%);
 }
 
+/* boardsize dropdown button */
+.dropdown-content {
+    display: none;
+    position: absolute;
+}
+
+.dropdown-content p {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
 
 
 @keyframes popupExtrasShow {
