@@ -1,6 +1,10 @@
-function dropDown() {
-    document.getElementById("dropdown-content").classList.toggle("show");
+function selectValue() {
+    var selectDropdown =  document.getElementsByClassName("dropdown-content");
+    var selectedValue = selectDropdown.options[selectDropdown.selectedIndex].value;
+    boardNumRows = selectedValue;
 }
+
+
 window.onclick = function(event) {
     if (!event.target.matches(".dropbtn")) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
