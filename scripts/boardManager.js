@@ -1,8 +1,3 @@
-function selectValue() {
-    var selectDropdown =  localStorage.getElementsByClassName("dropdown-content");
-    var selectedValue = selectDropdown.options[selectDropdown.selectedIndex].value;
-    boardNumRows = selectedValue;
-}
 
 
 window.onclick = function(event) {
@@ -16,4 +11,20 @@ window.onclick = function(event) {
             }
         }
     }
+}
+
+function changeBoardSize(value) {
+    localStorage.setItem("boardSize", value);
+    console.log(value);
+}
+
+function boardSizeToIndex(value) {
+    return value - 4
+}
+
+function onLoadSettings() {
+    initTheme();
+    boardSize = localStorage.getItem("boardSize")
+    boardSizeDropdown = document.getElementById("board-size-dropdown")
+    boardSizeDropdown.selectedIndex = boardSizeToIndex(boardSize)
 }

@@ -52,7 +52,6 @@ const rightTimerTextP = document.getElementById("right-timer-text-p");
 let leftStopwatch;
 let rightStopwatch;
 
-
 function genBoardLines() {
     let padding = `${boardEdgeLength}px`;
     function genVerLine() {
@@ -90,6 +89,7 @@ function updateBoardSize() {
 }
 
 function initBoard() {
+    boardNumRows = localStorage.getItem("boardSize");
     genBoardLines();
     genTileDivs();
     initBoardArray();
@@ -243,6 +243,7 @@ function putStoneAt(x, y) {
         tile.backgroundImage = BACKGROUND_IMAGE_STONE;
         board[x][y] = WHITE;
     }
+    playPlaceStoneSound()
 }
 
 function nextTurn() {
@@ -262,30 +263,36 @@ function getTileDiv(x, y) {
     return tileDivs[x * boardNumRows + y];
 }
 
+function popupVictory(winningColor) {
+    if (winningColor == BLACK) {
+        setTimeout(function() {
+            console.log("BLACK won")
+            animationShowGamOverText("BLACK WON");
+            setTimeout(function() {
+                document.querySelector(".popupBarContainer").style.backgroundColor = "#000000aa";
+            }, 2)
+        }, 20)
+    } else {
+        setTimeout(function() {
+            console.log("WHITE won")
+            animationShowGamOverText("WHITE WON");
+            setTimeout(function() {
+                document.querySelector(".popupBarContainer").style.backgroundColor = "#ffffffaa";
+            }, 2)
+        }, 20)
+    }
+}
+
 function isWon(x, y) {
     // Check if the given piece participate in a 5-in-a-row
     // empty, out of board (negative and bigger than length)
     
     let winningPos = getWinningPos(x, y)
     if (winningPos.length > 0) {
+        // The stone at (x, y) caused a victory
         for (let pos of winningPos) highlightStone(pos[0], pos[1])
-        if (board[x][y] == BLACK) {
-            setTimeout(function() {
-                console.log("BLACK won")
-                animationShowGamOverText("BLACK WON");
-                setTimeout(function() {
-                    document.querySelector(".popupBarContainer").style.backgroundColor = "#000000aa";
-                }, 2)
-            }, 20)
-        } else {
-            setTimeout(function() {
-                console.log("WHITE won")
-                animationShowGamOverText("WHITE WON");
-                setTimeout(function() {
-                    document.querySelector(".popupBarContainer").style.backgroundColor = "#ffffffaa";
-                }, 2)
-            }, 20)
-        }
+        popupVictory(board[x][y]);
+        playVictoryMusic()
         endGame();
         return true;
     }
@@ -410,6 +417,7 @@ function startStopwatch() {
 
 function startGame() {
     clearBoard()
+    stopAudio()
     isWhoseTurn = BLACK
     // buttonStartGame.disabled = true
     // buttonEndGame.disabled = false
@@ -451,14 +459,6 @@ function onLoad() {
     initBoard();
     initTimer();
     window.onresize = onResize;
-}
-
-function onloadHelp() {
-    initTheme();
-}
-
-function onLoadSettings() {
-    initTheme();
 }
 
 // add clicking sound effects
