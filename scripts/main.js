@@ -10,6 +10,7 @@ let stoneDiameter = 32;
 let boardBorderRadius = 15;
 
 // Other global variables
+let isPlaying = false;
 let isWhoseTurn = BLACK;
 let blackTime = 0;
 let whiteTime = 0;
@@ -45,6 +46,11 @@ const tileContainer = document.getElementById("game-board-tiles");
 const gridContainer = document.getElementById("game-board-grids");
 const leftTimerStone = document.getElementById("left-timer-stone");
 const rightTimerStone = document.getElementById("right-timer-stone");
+const leftTimerTextP = document.getElementById("left-timer-text-p");
+const rightTimerTextP = document.getElementById("right-timer-text-p");
+
+let leftStopwatch;
+let rightStopwatch;
 
 
 function genBoardLines() {
@@ -119,6 +125,7 @@ function genTileDivs() {
             tileDiv.setAttribute("onclick", `onClickDivAt(${i}, ${j})`);
 
             let onMouseEnter = (e) => {
+                if (!isPlaying) return
                 if (board[i][j] == EMPTY) {
                     if (isWhoseTurn == BLACK) {
                         e.target.style.backgroundColor = COLOR_STR_HIGHLIGHT_BLACK;
@@ -214,10 +221,12 @@ function isTileOccupied(x, y) {
 }
 
 function onClickDivAt(x, y) {
+    if (!isPlaying) return
     if (!isTileOccupied(x, y)) {
         putStoneAt(x, y);
-        isWon(x, y);
-        nextTurn();
+        if (!isWon(x, y)) {
+            nextTurn();
+        }
     }
 }
 
@@ -239,8 +248,12 @@ function putStoneAt(x, y) {
 function nextTurn() {
     if (isWhoseTurn == BLACK) {
         isWhoseTurn = WHITE;
+        leftStopwatch.stop();
+        rightStopwatch.start();
     } else {
         isWhoseTurn = BLACK;
+        rightStopwatch.stop();
+        leftStopwatch.start();
     }
 }
 
@@ -253,7 +266,7 @@ function isWon(x, y) {
     // Check if the given piece participate in a 5-in-a-row
     // empty, out of board (negative and bigger than length)
     
-    let winningPos = checkDirectionWin(x, y)
+    let winningPos = getWinningPos(x, y)
     if (winningPos.length > 0) {
         for (let pos of winningPos) highlightStone(pos[0], pos[1])
         if (board[x][y] == BLACK) {
@@ -274,7 +287,9 @@ function isWon(x, y) {
             }, 20)
         }
         endGame();
+        return true;
     }
+    return false;
 }
 
 function highlightStone(x, y) {
@@ -290,7 +305,7 @@ function isOutOfBounds(x, y) {
     return (x < 0 || x >= boardNumRows || y < 0 || y >= boardNumRows)
 }
 
-function checkDirectionWin(x, y) {
+function getWinningPos(x, y) {
     // Return an array of pos that participate in winning rows
     function getConsecCountInDir(xStart, yStart, xDir, yDir) {
         let color = board[xStart][yStart]
@@ -304,7 +319,7 @@ function checkDirectionWin(x, y) {
         }
         return count
     }
-
+    
     let consecT = getConsecCountInDir(x, y, -1, 0)
     let consecB = getConsecCountInDir(x, y, 1, 0)
     let consecL = getConsecCountInDir(x, y, 0, -1)
@@ -315,7 +330,7 @@ function checkDirectionWin(x, y) {
     let consecBR = getConsecCountInDir(x, y, 1, 1)
     
     let winningPos = []
-
+    
     // vertical
     if (consecB + consecT >= 4) {
         for (let i = 1; i <= consecT; ++i) winningPos.push([x - i, y])
@@ -348,13 +363,17 @@ function initTimerStone() {
     rightTimerStone.style.backgroundColor = COLOR_STR_WHITE;
     rightTimerStone.style.boxShadow = BOX_SHADOW_WHITE_STONE;
     rightTimerStone.backgroundImage = BACKGROUND_IMAGE_STONE;
-    
 }
 
 function initTimer() {
     initTimerStone()
+    
+    // Both player start with 0 time spent
     whiteTime = 0
     blackTime = 0
+    leftStopwatch = new Stopwatch(leftTimerTextP, 20);
+    rightStopwatch = new Stopwatch(rightTimerTextP, 20);
+
 }
 
 function hideBoardStones() {
@@ -370,18 +389,36 @@ function clearBoard() {
 }
 
 function startGameBtnClick() {
-    animationRemoveGameOverText();
-    startGame();
+    if (!isPlaying) {
+        animationRemoveGameOverText();
+        startGame();
+    } else {
+        animationShowGamOverText("Game Over");
+        endGame();
+    }
+}
+
+function startStopwatch() {
+    leftStopwatch.reset()
+    rightStopwatch.reset()
+    if (isWhoseTurn == BLACK) {
+        leftStopwatch.start()
+    } else if (isWhoseTurn == WHITE) {
+        rightStopwatch.start()
+    }
 }
 
 function startGame() {
-    clearBoard();
-    isWhoseTurn = BLACK;
-    buttonStartGame.disabled = true;
-    buttonEndGame.disabled = false;
+    clearBoard()
+    isWhoseTurn = BLACK
+    // buttonStartGame.disabled = true
+    // buttonEndGame.disabled = false
+    buttonStartGame.textContent = "End Game"
+    isPlaying = true
     
     // show pulse animation on board
-    gameBoard.className = 'start';
+    gameBoard.className = 'start'
+    startStopwatch()
 }
 
 function endGameBtnClick() {
@@ -390,9 +427,14 @@ function endGameBtnClick() {
 }
 
 function endGame() {
+    isPlaying = false;
     gameBoard.className = '';
-    buttonStartGame.disabled = false;
-    buttonEndGame.disabled = true;
+    // buttonStartGame.disabled = false;
+    // buttonEndGame.disabled = true;
+    buttonStartGame.textContent = "Start Game";
+
+    leftStopwatch.stop()
+    rightStopwatch.stop()
 }
 
 function goToMainMenu() {
@@ -412,6 +454,10 @@ function onLoad() {
 }
 
 function onloadHelp() {
+    initTheme();
+}
+
+function onLoadSettings() {
     initTheme();
 }
 

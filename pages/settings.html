@@ -8,7 +8,7 @@
     <link rel="stylesheet" id="theme-switcher" href="../css/themes/light.css">
     <link rel="stylesheet" href="../css/font-awesome-4.7.0/css/font-awesome.css">
 </head>
-<body onload="onLoad()">
+<body onload="onLoadSettings()">
     <div id="container">
         <div id="nav-bar">
             <!-- Navigation bar that follows the screen down, always showing-->
@@ -35,7 +35,51 @@
         
         <div id="body">
             <h2>Appearance</h2>
-            <button id="btn-change-theme" onclick="changeTheme()">Change theme</button>
+            <div class="settings-items">
+                <div class="settings-items-name">
+                    <p>Theme:</p>
+                </div>
+                <div class="settings-items-options">
+                    <button id="btn-change-theme" onclick="changeTheme()">Change theme</button>
+                </div>
+            </div>
+            <div class="settings-items">
+                <div class="settings-items-name">
+                    <p>Board size:</p> 
+                </div>
+                <div class="settings-items-options">
+                    <div class="dropdown">
+                        <select class="dropbtn">
+                            <option value="15" selected disabled hidden>15</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="10">20</option>
+                            <option value="11">21</option>
+                            <option value="12">22</option>
+                            <option value="13">23</option>
+                            <option value="14">24</option>
+                            <option value="15">25</option>
+                            <option value="16">26</option>
+                            <option value="17">27</option>
+                            <option value="18">28</option>
+                            <option value="19">29</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
             <h2>Rules</h2>
             <div class="settings-rule-item"></div>
             <p>Upcoming: choose which rule or variant of Go Bang to use.</p>
