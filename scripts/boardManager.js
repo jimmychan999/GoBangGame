@@ -1,4 +1,4 @@
-const defaultBoardSize = 32
+const DEFAULT_BOARD_SIZE = 19
 
 window.onclick = function(event) {
     if (!event.target.matches(".dropbtn")) {
@@ -19,12 +19,16 @@ function changeBoardSize(value) {
 }
 
 function boardSizeToIndex(value) {
-    return value - 4
+    return value - 4;
 }
 
 function initBoardManager() {
     initTheme();
-    boardSize = localStorage.getItem("boardSize") ?? defaultBoardSize
-    boardSizeDropdown = document.getElementById("board-size-dropdown")
-    boardSizeDropdown.selectedIndex = boardSizeToIndex(boardSize)
+    boardSize = localStorage.getItem("boardSize");
+    if (!boardSize) {
+        changeBoardSize(DEFAULT_BOARD_SIZE);
+        boardSize = DEFAULT_BOARD_SIZE;
+    }
+    boardSizeDropdown = document.getElementById("board-size-dropdown");
+    boardSizeDropdown.selectedIndex = boardSizeToIndex(boardSize);
 }
