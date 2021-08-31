@@ -455,6 +455,7 @@ function onResize() {
 }
 
 function onLoad() {
+    isMuted = localStorage.getItem("isMuted")
     initTheme();
     initBoard();
     initTimer();
