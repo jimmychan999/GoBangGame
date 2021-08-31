@@ -1,3 +1,5 @@
+const defaultBoardSize = 32
+
 window.onclick = function(event) {
     if (!event.target.matches(".dropbtn")) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -20,9 +22,9 @@ function boardSizeToIndex(value) {
     return value - 4
 }
 
-function onLoadSettings() {
+function initBoardManager() {
     initTheme();
-    boardSize = localStorage.getItem("boardSize")
+    boardSize = localStorage.getItem("boardSize") ?? defaultBoardSize
     boardSizeDropdown = document.getElementById("board-size-dropdown")
     boardSizeDropdown.selectedIndex = boardSizeToIndex(boardSize)
 }

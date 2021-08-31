@@ -40,19 +40,31 @@ function updateMuteButtonText() {
     }
 }
 
+function loadLocalStorageBool(key) {
+	let val = localStorage.getItem(key)
+	// localStorage might return string instead of bool
+	if (typeof val == "string") {
+		// val is string
+		if (val == "true")
+			val = true
+		else
+			val = false
+	}
+	console.log("load", key, val)
+	return val
+
+	// return (val == "true") // Replace the other code with this
+}
+
+function setIsMutedAccordingToLocalStorage() {
+	isMuted = loadLocalStorageBool("isMuted")
+}
+
 function onClickMuteButton() {
 	// If muted, enable audio, else, disable audio.
 	// Then change button text accordingly.
 	console.log("on click mute button")
-	isMuted = localStorage.getItem("isMuted")
-
-	// localStorage might return string instead of bool
-	if (typeof isMuted == "string") {
-		// isMuted is string
-		if (isMuted == "true") isMuted = true
-		else isMuted = false
-	}
-	// if (isMuted == null) isMuted = false
+	isMuted = loadLocalStorageBool("isMuted")
 
 	console.log(isMuted)
 	if (isMuted == true) {
@@ -67,7 +79,7 @@ function onClickMuteButton() {
 }
 
 function initAudioManager() {
-	isMuted = localStorage.getItem("isMuted")
+	setIsMutedAccordingToLocalStorage()
 	console.log("muted:", isMuted)
     updateMuteButtonText()
 }

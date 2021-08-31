@@ -458,6 +458,7 @@ function onLoad() {
     initTheme();
     initBoard();
     initTimer();
+    isMuted = loadLocalStorageBool("isMuted")
     window.onresize = onResize;
 }
 
