@@ -1,5 +1,5 @@
 function selectValue() {
-    var selectDropdown =  document.getElementsByClassName("dropdown-content");
+    var selectDropdown =  localStorage.getElementsByClassName("dropdown-content");
     var selectedValue = selectDropdown.options[selectDropdown.selectedIndex].value;
     boardNumRows = selectedValue;
 }
