@@ -52,8 +52,6 @@ const rightTimerTextP = document.getElementById("right-timer-text-p");
 let leftStopwatch;
 let rightStopwatch;
 
-const victoryMusic = new Audio("../assets/audio/ff7_victory_fanfare.mp3")
-
 function genBoardLines() {
     let padding = `${boardEdgeLength}px`;
     function genVerLine() {
@@ -245,6 +243,7 @@ function putStoneAt(x, y) {
         tile.backgroundImage = BACKGROUND_IMAGE_STONE;
         board[x][y] = WHITE;
     }
+    playPlaceStoneSound()
 }
 
 function nextTurn() {
@@ -292,8 +291,8 @@ function isWon(x, y) {
     if (winningPos.length > 0) {
         // The stone at (x, y) caused a victory
         for (let pos of winningPos) highlightStone(pos[0], pos[1])
-        victoryMusic.play()
         popupVictory(board[x][y]);
+        playVictoryMusic()
         endGame();
         return true;
     }
@@ -414,11 +413,6 @@ function startStopwatch() {
     } else if (isWhoseTurn == WHITE) {
         rightStopwatch.start()
     }
-}
-
-function stopAudio() {
-    victoryMusic.pause();
-    victoryMusic.currentTime = 0;
 }
 
 function startGame() {
