@@ -455,12 +455,14 @@ function onResize() {
 }
 
 function onLoad() {
-    isMuted = localStorage.getItem("isMuted")
     initTheme();
     initBoard();
     initTimer();
     window.onresize = onResize;
 }
 
-// add clicking sound effects
 
+function onLoadSettings() {
+    initBoardManager()
+    initAudioManager()
+}
