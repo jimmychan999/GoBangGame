@@ -540,3 +540,12 @@ a {
     20% {margin-top: -40px; opacity: 0;}
     100% {margin-top: 15px; opacity: 1;}
 }
+
+.popup-close-button {
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    border-radius: 50%;
+}

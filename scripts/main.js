@@ -125,6 +125,7 @@ function genTileDivs() {
             tileDiv.setAttribute("onclick", `onClickDivAt(${i}, ${j})`);
 
             let onMouseEnter = (e) => {
+                if (!isPlaying) return
                 if (board[i][j] == EMPTY) {
                     if (isWhoseTurn == BLACK) {
                         e.target.style.backgroundColor = COLOR_STR_HIGHLIGHT_BLACK;
@@ -220,6 +221,7 @@ function isTileOccupied(x, y) {
 }
 
 function onClickDivAt(x, y) {
+    if (!isPlaying) return
     if (!isTileOccupied(x, y)) {
         putStoneAt(x, y);
         if (!isWon(x, y)) {
@@ -264,7 +266,7 @@ function isWon(x, y) {
     // Check if the given piece participate in a 5-in-a-row
     // empty, out of board (negative and bigger than length)
     
-    let winningPos = checkDirectionWin(x, y)
+    let winningPos = getWinningPos(x, y)
     if (winningPos.length > 0) {
         for (let pos of winningPos) highlightStone(pos[0], pos[1])
         if (board[x][y] == BLACK) {
@@ -303,7 +305,7 @@ function isOutOfBounds(x, y) {
     return (x < 0 || x >= boardNumRows || y < 0 || y >= boardNumRows)
 }
 
-function checkDirectionWin(x, y) {
+function getWinningPos(x, y) {
     // Return an array of pos that participate in winning rows
     function getConsecCountInDir(xStart, yStart, xDir, yDir) {
         let color = board[xStart][yStart]
