@@ -4,7 +4,7 @@ A minimalistic Go Bang (also known as: Five in a row, Wuziqi, Gomoku, 五子棋,
 
 ## Preview
 
-<img src="readme_assets/screenshot_themes.png" alt="screenshot_themes" style="zoom: 67%;" />
+<img src="readme_assets/gobangThumbnail001.png" alt="screenshot_themes" style="zoom: 67%;" />
 
 ## Future plans
 
